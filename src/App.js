@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Home from './components/Home/Home';
+import Forum from './components/Forum/Forum';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
+import CreateThread from './components/CreateThread/CreateThread';
+import Footer from './components/Footer/Footer';
+import ThreadDetails from './components/ThreadDetails/ThreadDetails';
+import Navigation from './components/Navigation/Navigation';
+import Account from './components/Account/Account';
+import { AuthContextProvider } from './contexts/AuthContext';
+import RouteGuard from './components/RouteGuard/RouteGuard';
+import PageNotFound from './components/PageNotFound/PageNotFound';
+import Logout from './components/Logout/Logout';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+    return (
+        <>
+            <AuthContextProvider>
+                <Navigation />
+
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/forum' element={<Forum />} />
+                    <Route path='/forum/:id' element={<RouteGuard> <ThreadDetails /> </RouteGuard>} />
+                    <Route path='/create-thread' element={<RouteGuard> <CreateThread /> </RouteGuard>} />
+                    <Route path='/account' element={<RouteGuard>  <Account /></RouteGuard>} />
+                    <Route path='/register' element={<Register />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/logout' element={<Logout />} />
+                    <Route path='*' element={<PageNotFound />} />
+                </Routes>
+
+                <Footer />
+            </AuthContextProvider>
+
+        </>
+    );
+};
 
 export default App;

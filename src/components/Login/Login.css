@@ -1,0 +1,98 @@
+.login-container {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    max-width: 300px;
+    padding: 4;
+}
+
+.login-title {
+    color: #ffffff; 
+    font-size: 25px;
+    line-height: 1.75rem;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.register-redirect {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: #ffffff; 
+}
+
+.register-link {
+    text-decoration: underline;
+}
+
+/* ******************** DIV STYLING START *********************** */
+
+.email {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.password {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+ 
+/* ******************** DIV STYLING END *********************** */
+
+                        /* <<<<<< >>>>>>  */
+
+/* ******************** LABEL STYLING START *********************** */
+
+.email-label {
+    font-weight: medium;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.password-label {
+    font-weight: medium;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+
+/* ******************** LABEL STYLING END *********************** */
+
+                        /* <<<<<< >>>>>>  */
+
+/* ******************** INPUT STYLING START *********************** */
+
+
+.email-input {
+    border-style: none;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+
+.password-input {
+    border-style: none;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+
+/* ******************** INPUT STYLING END *********************** */
+
+.submit-btn {
+    padding: 1rem; 
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem; 
+    color: #ffffff; 
+    width: 100%; 
+    border-width: 1px; 
+}
+.submit-btn:hover {
+    background-color: rgba(0, 136, 169, 0.8);
+
+}

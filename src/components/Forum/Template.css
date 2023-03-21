@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap");
+
+.a {
+  color: #ff0042;
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+.container {
+  margin: 20px;
+  padding: 20px;
+}
+
+.forum {
+  margin-top: 20px;
+}
+
+.forum-title {
+  background-color: #24252a;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 4px;
+  font-size: 15px;
+  color: #ecf0f1;
+  font-family: "Montserrat", sans-serif;
+}
+
+.forum-row {
+  display: grid;
+  grid-template-columns: 7% 60% 13% 20%;
+}
+
+.subform-column {
+  padding: 10px;
+  margin: 4px;
+  border-radius: 5px;
+  background-color: #24252a;
+  color: #ecf0f1;
+}
+
+.forum-description * {
+  margin-block: 0;
+}
+
+.forum-icon {
+  size: 20px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.forum-icon {
+  size: 5px;
+}
+
+.thread-title {
+  color: #d7dada;
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+.thread-title:hover {
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  color: white;
+}
+
+.no-posts {
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+  text-align: center;
+  padding: 5px;
+  margin: 55px;
+  border-radius: 5px;
+  background-color: #24252a;
+  color: #ecf0f1;
+}

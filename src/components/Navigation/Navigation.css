@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap");
+
+.nav__box {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: #24252a;
+}
+
+.li,
+a,
+.logout-button {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: #ecf0f1;
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 10%;
+}
+
+.nav__home {
+  margin-left: 30px;
+  cursor: pointer;
+  font-size: 40px;
+}
+
+.nav__links {
+  list-style: none;
+}
+
+.nav__links li {
+  display: inline-block;
+  padding: 0px 20px;
+}
+
+.forum__page {
+  margin-right: 300px;
+}
+
+.nav__links li a {
+  transition: all 0.3s ease 0s;
+}
+
+.nav__links li a:hover {
+  transition: all 0.3s ease 0s;
+  color: #0088a9;
+}
+
+.nav__links .account__page {
+  color: #ecf0f1;
+  font-size: 20px;
+  margin-right: 20px;
+  padding: 5px 14px;
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.nav__links .account__page:hover {
+  background-color: rgba(0, 136, 169, 0.8);
+}
+
+.user__greeting {
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  color: #ecf0f1;
+}
+
+.logout-button {
+  margin-right: 30px;
+  padding: 5px 20px;
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.logout-button:hover {
+  background-color: rgba(0, 136, 169, 0.8);
+}
