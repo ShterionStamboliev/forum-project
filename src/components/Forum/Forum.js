@@ -10,18 +10,22 @@ const Forum = () => { // SHOW FORUM THREADS HERE
     const threadsCollectionRef = collection(db, "threads");
 
     useEffect(() => {
-        const threadData = query(threadsCollectionRef);
-        const unsubscribe = onSnapshot(threadData, (querySnapshot) => {
-            let threadsArray = [];
-            querySnapshot.forEach((doc) => {
-                threadsArray.push({
-                    id: doc.id,
-                    ...doc.data()
+        try {
+            const threadData = query(threadsCollectionRef);
+            const unsubscribe = onSnapshot(threadData, (querySnapshot) => {
+                let threadsArray = [];
+                querySnapshot.forEach((doc) => {
+                    threadsArray.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
                 });
+                setThreads(threadsArray);
             });
-            setThreads(threadsArray);
-        });
-        return () => unsubscribe();
+            return () => unsubscribe();
+        } catch (error) {
+            console.log(error.message);
+        }
     }, [threadsCollectionRef]);
 
     return (
@@ -40,17 +44,17 @@ const Forum = () => { // SHOW FORUM THREADS HERE
                                 <h1><Link to={`/forum/` + x.id} className="thread-title">{x.post.title}</Link></h1>
                             </div>
                             <div className="forum-post subform-column center">
-                                <span>Comments {x.comments.length}</span>
+                                {/* <span>Comments {x.post.comments.length}</span> */}
                             </div>
                             <div className="forum-post-info subform-column">
                                 <b>Posted by {x.author.name} </b>
                                 <br />
-                                On {x.postedOn} at {x.postedAt}
+                                On {x.post.postedOn} at {x.post.postedAt}
                             </div>
                         </div>
                     }) :
                     <div className="no-posts">
-                        There are no threads yet. Be the first one to make a <Link to='/create-thread' style={{textDecoration: 'underline', fontSize: '25px'}}><i>post!</i></Link> 
+                        There are no threads yet. Be the first one to make a <Link to='/create-thread' style={{ textDecoration: 'underline', fontSize: '25px' }}><i>post!</i></Link>
                     </div>
                 }
             </div>

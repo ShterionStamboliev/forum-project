@@ -1,22 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { db, auth } from '../../config/firebase';
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import './Create.css';
 
 const CreateThread = () => {
-    const [title, setTitle] = useState('');
-    const [comment, setComment] = useState('');
-
+    const [value, setValue] = useState({
+        title: '',
+        comment: '',
+    });
+    const navigate = useNavigate();
     const threadsCollection = collection(db, "threads");
 
-
-    const navigate = useNavigate();
+    const handleEventSubmit = (e) => {
+        setValue({ ...value, [e.target.name]: e.target.value });
+    };
 
     const onSubmitThread = async () => {
         try {
-            if (title === '' || comment === '') {
+            if (value.title === '' || value.comment === '') {
                 Swal.fire({
                     icon: 'error',
                     title: 'You cannot leave empty fields!',
@@ -26,15 +29,15 @@ const CreateThread = () => {
             await addDoc(threadsCollection, {
                 author: {
                     name: auth?.currentUser?.email,
-                    userId: auth?.currentUser?.uid,
+                    owner: auth?.currentUser?.uid,
                 },
                 post: {
-                    title,
-                    comment,
+                    title: value.title,
+                    comment: value.comment,
+                    postedOn: new Date().toLocaleDateString(),
+                    postedAt: new Date().toLocaleTimeString(),
+                    comments: []
                 },
-                postedOn: new Date().toLocaleDateString(),
-                postedAt: new Date().toLocaleTimeString(),
-                comments: []
             });
             Swal.fire({
                 position: 'top-end',
@@ -43,20 +46,17 @@ const CreateThread = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
-            setTitle('');
-            setComment('');
+            setValue('');
             navigate('/forum');
         } catch (error) {
             console.log('error', error);
         }
-    };
 
-    const onTitleChange = (e) => {
-        setTitle(e.target.value);
-    };
-
-    const onCommentChange = (e) => {
-        setComment(e.target.value);
+        try {
+            await updateDoc()
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     return (
@@ -66,11 +66,11 @@ const CreateThread = () => {
             </div>
             <div className="post-title">
                 <label className="post-title-label" htmlFor="post-title">Thread title: </label>
-                <input value={title} onChange={onTitleChange} className="post-title-input" type="text" name="title" id="title" placeholder="Enter thread title..." />
+                <input value={value.title} onChange={handleEventSubmit} className="post-title-input" type="text" name="title" id="title" placeholder="Enter thread title..." />
             </div>
             <div className="post-comment">
                 <label className="post-comment-label" htmlFor="post-comment">Comment: </label>
-                <textarea value={comment} onChange={onCommentChange} className="post-comment-input" type="text" name="comment" id="comment" cols="30" rows="10" placeholder="Leave a comment..."></textarea>
+                <textarea value={value.comment} onChange={handleEventSubmit} className="post-comment-input" type="text" name="comment" id="comment" cols="30" rows="10" placeholder="Leave a comment..."></textarea>
             </div>
             <input type="submit" onClick={onSubmitThread} className="btn-submit" value="Submit" />
         </div>
