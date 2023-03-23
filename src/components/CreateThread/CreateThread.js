@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { db, auth } from '../../config/firebase';
-import { collection, addDoc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, writeBatch, setDoc, doc, arrayUnion } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import './Create.css';
@@ -10,7 +10,13 @@ const CreateThread = () => {
         title: '',
         comment: '',
     });
+
+    const userId = auth.currentUser.uid;
+    const userRef = doc(db, 'users', userId);
+    const batch = writeBatch(db);
+
     const navigate = useNavigate();
+
     const threadsCollection = collection(db, "threads");
 
     const handleEventSubmit = (e) => {
@@ -39,6 +45,14 @@ const CreateThread = () => {
                     comments: []
                 },
             });
+            // Adding post to the current user map posts
+            await updateDoc(userRef, {
+                posts: arrayUnion({
+                    threadTitle: value.title,
+                    comment: value.comment                    
+                })
+            });
+            await batch.commit();
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -50,12 +64,6 @@ const CreateThread = () => {
             navigate('/forum');
         } catch (error) {
             console.log('error', error);
-        }
-
-        try {
-            await updateDoc()
-        } catch (error) {
-            console.log(error.message);
         }
     };
 

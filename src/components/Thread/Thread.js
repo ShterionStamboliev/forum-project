@@ -32,7 +32,7 @@ const Thread = () => {
                     comment: value.comment,
                     lastUpdated: new Date().toLocaleDateString()
                 }
-            }).then(res => {
+            }).then(() => {
                 Swal.fire({
                     title: 'Do you want to save the changes?',
                     showDenyButton: true,

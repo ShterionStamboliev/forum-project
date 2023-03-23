@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { db } from '../../config/firebase';
-import { collection, addDoc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { UseAuth } from "../../contexts/AuthContext";
 import Swal from "sweetalert2";
 import { runEmptyFieldAlert } from "../../utils/alerts";
 import './Register.css'
 
 const Register = () => {
-    const { createUser } = UseAuth();
-    const usersCollection = collection(db, "users");
+    const { createUser} = UseAuth();
     const navigate = useNavigate();
 
     const [value, setValue] = useState({
@@ -32,16 +31,22 @@ const Register = () => {
                 runEmptyFieldAlert();
                 return;
             }
-
             // TODO::: DO INPUT FIELD CHECK e.q (email.length < 5)
             await createUser(value.email, value.password)
-            await addDoc(usersCollection, {
-                firstName: value.firstName,
-                lastName: value.lastName,
-                email: value.email,
-                username: value.username,
-                createdOn: new Date().toLocaleDateString(),
-            });
+                .then(async (userCredentials) => {
+                    const user = userCredentials.user;
+                    // Signed in user, assigned with the same ID
+                    const docRef = doc(db, 'users', user.uid);
+                    await setDoc(docRef, {
+                        firstName: value.firstName,
+                        lastName: value.lastName,
+                        email: value.email,
+                        username: value.username,
+                        createdOn: new Date().toLocaleDateString(),
+                        posts: []
+                    });
+                });
+
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top',
@@ -60,7 +65,7 @@ const Register = () => {
             navigate('/');
         } catch (error) {
             console.log(error.message);
-        }
+        };
     };
 
     return (

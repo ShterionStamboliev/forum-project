@@ -27,7 +27,7 @@ const ThreadDetails = () => {
             <h1 style={{ textAlign: 'center', color: 'white' }}>Current Thread details</h1>
             {Object.values(thread).map((x) => {
                 return <div key={x.id}>
-                    <h1 style={{ textAlign: 'center', color: 'white' }}>f{x.title}</h1>
+                    <h1 style={{ textAlign: 'center', color: 'white' }}>{x.title}</h1>
                     <h1 style={{ textAlign: 'center', color: 'white' }}>{x.comment}</h1>
                 </div>
             })}

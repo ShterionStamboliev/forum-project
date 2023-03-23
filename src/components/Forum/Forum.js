@@ -44,7 +44,7 @@ const Forum = () => { // SHOW FORUM THREADS HERE
                                 <h1><Link to={`/forum/` + x.id} className="thread-title">{x.post.title}</Link></h1>
                             </div>
                             <div className="forum-post subform-column center">
-                                {/* <span>Comments {x.post.comments.length}</span> */}
+                                <span>Comments {x.post.comments.length}</span>
                             </div>
                             <div className="forum-post-info subform-column">
                                 <b>Posted by {x.author.name} </b>

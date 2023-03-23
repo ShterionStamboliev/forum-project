@@ -13,8 +13,8 @@ export const AuthContextProvider = ({ children }) => {
 
     const [user, setUser] = useState({});
 
-    const createUser = (email, password) => {
-        return createUserWithEmailAndPassword(auth, email, password);
+    const createUser = async (email, password) => {
+        return await createUserWithEmailAndPassword(auth, email, password);
     };
 
     const signInUser = (email, password) => {
