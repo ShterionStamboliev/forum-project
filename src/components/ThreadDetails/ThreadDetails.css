@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap");
+
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+.wrapper {
+    display: grid;
+    margin: 10px auto 0 auto;
+    max-width: 80%;
+    grid-template-areas:
+    "a a ." 
+    "b c c" 
+    "edit c c";
+    grid-template-columns: clamp(4rem, 100%, 6rem) 8fr 8fr;
+    grid-template-rows: 20fr 20fr 20fr;
+  }
+
+.current-thread-title {
+    background-color: #24252a;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #ecf0f1;
+    grid-area: a;
+}
+
+.thread-description * {
+    margin-block: 0;
+}
+
+.user-thread-icon {
+    grid-area: b;
+    background-color: #24252a;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 15px;
+    max-height: 5rem;
+}
+
+.thread-description {
+    grid-area: c;
+    background-color: #24252a;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 15px;
+    margin-left: 15px;
+    color: #ecf0f1;
+}
+
+.thread-edit-button {
+    grid-area: edit;
+    text-align: center;
+    color: #ecf0f1;
+    font-size: 20px;
+    padding: 10px;
+    background-color: rgba(0, 136, 169, 1);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+  }
+  
+  .thread-edit-button:hover {
+    background-color: rgba(0, 136, 169, 0.8);
+  }
+
+
+/* <div className="thread-container">
+<div className="thread-box">
+
+    <div className="current-thread-title">
+        <h1>Forum threads</h1>
+    </div>
+
+    <div className="thread-row">
+        <div className="user-thread-icon subform-column center">
+
+        </div>
+        <div className="thread-description subform-column">
+
+        </div>
+        <div className="thread-edit-button subform-column center">
+            <button></button>
+        </div>
+    </div>
+
+</div>
+</div> */
+
+
+
+
+
+
+

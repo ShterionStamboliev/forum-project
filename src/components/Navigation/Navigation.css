@@ -52,6 +52,10 @@ header {
   color: #0088a9;
 }
 
+.nav__links li a:focus {
+  border-bottom: 2px solid #0088a9;
+}
+
 .nav__links .account__page {
   color: #ecf0f1;
   font-size: 20px;
@@ -68,8 +72,11 @@ header {
   background-color: rgba(0, 136, 169, 0.8);
 }
 
+.nav__links .account__page:active {
+  scale: 0.9;
+}
+
 .user__greeting {
-  font-family: "Montserrat", sans-serif;
   font-size: 15px;
   color: #ecf0f1;
 }
@@ -86,4 +93,8 @@ header {
 
 .logout-button:hover {
   background-color: rgba(0, 136, 169, 0.8);
+}
+
+.nav__links .logout-button:active {
+  scale: 0.9;
 }

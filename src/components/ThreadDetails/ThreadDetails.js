@@ -1,7 +1,8 @@
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { db } from '../../config/firebase';
+import './ThreadDetails.css'
 
 const ThreadDetails = () => {
 
@@ -10,28 +11,34 @@ const ThreadDetails = () => {
 
     const threadRef = doc(db, 'threads', id);
 
-    useEffect(() => {
-        const unsubscribe = onSnapshot(threadRef, (doc) => {
-            const data = doc.data();
-            Object.values(data).forEach((x) => {
-                console.log(x);
-            });
-            setThread(data);
-        });
-        return () => unsubscribe();
-    }, []);
-
+    const getDocumentData = async () => {
+        const dataRef = await getDoc(threadRef);
+        const dataValues = dataRef.data();
+        console.log(dataValues);
+    };
+    // useEffect(() => {
+    //     getDocumentData();
+    // }, []);
 
     return (
-        <>
-            <h1 style={{ textAlign: 'center', color: 'white' }}>Current Thread details</h1>
-            {Object.values(thread).map((x) => {
-                return <div key={x.id}>
-                    <h1 style={{ textAlign: 'center', color: 'white' }}>{x.title}</h1>
-                    <h1 style={{ textAlign: 'center', color: 'white' }}>{x.comment}</h1>
+            <div className="wrapper">
+
+                <div className="current-thread-title">
+                    <h1>Forum threads</h1>
                 </div>
-            })}
-        </>
+
+                <div className="user-thread-icon center">
+                    {/* PUT USER IMAGE HERE  */}
+                </div>
+
+                <div className="thread-description">
+                    {/* PUT THREAD DESCRIPTION HERE */}description
+                    descriptiondescriptiondescriptiondescription
+
+                </div>
+                <Link to={`/forum/${id}/details`} className='thread-edit-button'>Edit thread</Link> 
+                {/* to search for icon */}
+            </div>
     )
 }
 

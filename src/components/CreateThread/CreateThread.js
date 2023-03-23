@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { db, auth } from '../../config/firebase';
-import { collection, addDoc, updateDoc, writeBatch, setDoc, doc, arrayUnion } from "firebase/firestore";
+import { collection, addDoc, updateDoc, writeBatch, doc, arrayUnion } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import './Create.css';

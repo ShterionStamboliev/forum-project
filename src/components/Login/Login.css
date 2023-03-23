@@ -94,5 +94,8 @@
 }
 .submit-btn:hover {
     background-color: rgba(0, 136, 169, 0.8);
+}
 
+.submit-btn:active {
+    scale: 0.9;
 }

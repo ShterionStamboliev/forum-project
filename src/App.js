@@ -25,7 +25,7 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='/forum' element={<Forum />} />
                     <Route path='/forum/:id' element={<ThreadDetails />} />  {/* PUT THREAD DETAILS HERE */}
-                    {/* <Route path='/forum/:id/details' element={<ThreadDetails />} /> */}
+                    <Route path='/forum/:id/details' element={<Thread />} />
                     <Route path='/create-thread' element={<RouteGuard> <CreateThread /> </RouteGuard>} />
                     <Route path='/account' element={<RouteGuard>  <Account /></RouteGuard>} />
                     <Route path='/register' element={<Register />} />
@@ -36,7 +36,6 @@ function App() {
 
                 <Footer />
             </AuthContextProvider>
-
         </>
     );
 };
