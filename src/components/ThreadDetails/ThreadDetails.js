@@ -60,7 +60,7 @@ const ThreadDetails = () => {
                 return <React.Fragment key={x.id}>
 
                     <div className="current-thread-title">
-                        <h1>{x.post.title}</h1>
+                        <h1>{x.post.postTitle}</h1>
                     </div>
 
                     <div className="user-thread-icon center">
@@ -68,7 +68,7 @@ const ThreadDetails = () => {
                     </div>
 
                     <div className="thread-description">
-                        <h1>{x.post.comment}</h1>
+                        <h1>{x.post.postDescription}</h1>
                     </div>
 
                     <Link to={`/forum/${id}/edit`} className='thread-edit-button'><FontAwesomeIcon icon={faPenSquare} /></Link>
@@ -106,7 +106,7 @@ const ThreadDetails = () => {
                     <div className="user-comment-text">
                         Users comments here
                     </div>
-                    
+
                     {/* <textarea name="userComment" id="userComment" cols="30" rows="10"></textarea>
                     <button value='submit'></button> */}
                 </React.Fragment>

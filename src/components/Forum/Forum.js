@@ -42,7 +42,7 @@ const Forum = () => { // SHOW FORUM THREADS HERE
                                 <BsCardText style={{ fontSize: '25px', color: '#ecf0f1' }} />
                             </div>
                             <div className="forum-description subform-column">
-                                <h1><Link to={`/forum/` + x.id} className="thread-title">{x.post.title}</Link></h1>
+                                <h1><Link to={`/forum/` + x.id} className="thread-title">{x.post.postTitle}</Link></h1>
                             </div>
                             <div className="forum-post subform-column center">
                                 <span>Comments {x.post.comments.length}</span>

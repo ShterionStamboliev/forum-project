@@ -11,7 +11,7 @@ const CreateThread = () => {
         comment: '',
     });
 
-    const userId = auth.currentUser.uid;
+    const userId = auth.currentUser?.uid;
     const userRef = doc(db, 'users', userId);
     const batch = writeBatch(db);
 
@@ -38,8 +38,8 @@ const CreateThread = () => {
                     name: auth?.currentUser?.email,
                 },
                 post: {
-                    title: value.title,
-                    comment: value.comment,
+                    postTitle: value.title,
+                    postDescription: value.comment,
                     comments: [],
                     postedOn: new Date().toLocaleDateString(),
                     postedAt: new Date().toLocaleTimeString(),
@@ -48,8 +48,8 @@ const CreateThread = () => {
             // Adding post to the current user map posts
             await updateDoc(userRef, {
                 posts: arrayUnion({
-                    threadTitle: value.title,
-                    comment: value.comment
+                    postTitle: value.title,
+                    postDescription: value.comment
                 })
             });
             await batch.commit();

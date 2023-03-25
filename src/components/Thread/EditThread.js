@@ -26,11 +26,10 @@ const EditThread = () => {
             runEmptyFieldAlert();
             return;
         };
-        // TO CHECK DOCUMENT REFERENCE
         try {
             await updateDoc(docSnap, {
-                'post.title': value.title,
-                'post.comment': value.comment,
+                'post.postTitle': value.title,
+                'post.postDescription': value.comment,
                 'post.lastUpdated': new Date().toLocaleDateString()
             }).then(() => {
                 Swal.fire({
