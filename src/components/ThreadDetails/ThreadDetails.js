@@ -101,12 +101,15 @@ const ThreadDetails = () => {
 
                     <UserComments />
 
-                    {/* <div className="user-comment-icon">
-                <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
-            </div> */}
+                    <div className="user-comment-icon">
+                        <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
+                    </div>
 
                     <div className="user-comment-text">
                         Users comments here
+                    </div>
+                    <div className="user-comment-name">
+
                     </div>
 
 
