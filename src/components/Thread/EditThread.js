@@ -7,6 +7,8 @@ import { runEmptyFieldAlert } from '../../utils/alerts';
 import Swal from 'sweetalert2';
 import './Thread.css';
 
+
+
 const EditThread = () => {
     const { id } = useParams();
     const [value, setValue] = useState({
@@ -27,11 +29,9 @@ const EditThread = () => {
         // TO CHECK DOCUMENT REFERENCE
         try {
             await updateDoc(docSnap, {
-                post: {
-                    title: value.title,
-                    comment: value.comment,
-                    lastUpdated: new Date().toLocaleDateString()
-                }
+                'post.title': value.title,
+                'post.comment': value.comment,
+                'post.lastUpdated': new Date().toLocaleDateString()
             }).then(() => {
                 Swal.fire({
                     title: 'Do you want to save the changes?',
