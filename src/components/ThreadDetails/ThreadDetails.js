@@ -75,12 +75,12 @@ const ThreadDetails = () => {
 
 
                     {/* <div className="user-comment-icon">
-                    <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
-                </div>
+                        <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
+                    </div>
 
-                <div className="user-comment-text">
-                    User comment here
-                </div> */}
+                    <div className="user-comment-text">
+                        User comment here
+                    </div> */}
 
                 </React.Fragment>
             }) : !isOwner && user ? Object.values(thread).map((x) => {
@@ -107,6 +107,7 @@ const ThreadDetails = () => {
                         Users comments here
                     </div>
 
+                    
                     {/* <textarea name="userComment" id="userComment" cols="30" rows="10"></textarea>
                     <button value='submit'></button> */}
                 </React.Fragment>

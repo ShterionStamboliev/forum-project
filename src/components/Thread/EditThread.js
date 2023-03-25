@@ -18,7 +18,6 @@ const EditThread = () => {
     const threadRef = doc(db, 'threads', id);
 
 
-
     const handleUpdate = async (e) => {
         e.preventDefault();
         const docSnap = threadRef;
