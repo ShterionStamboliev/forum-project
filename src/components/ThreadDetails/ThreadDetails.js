@@ -5,6 +5,7 @@ import { db } from '../../config/firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/fontawesome-free-regular';
 import { UseAuth } from '../../contexts/AuthContext'
+import UserComments from '../UserComments/UserComments';
 import './grid_old.css'
 import { faPenSquare } from '@fortawesome/fontawesome-free-solid';
 
@@ -74,20 +75,20 @@ const ThreadDetails = () => {
                     <Link to={`/forum/${id}/edit`} className='thread-edit-button'><FontAwesomeIcon icon={faPenSquare} /></Link>
 
 
-                    {/* <div className="user-comment-icon">
+                    <div className="user-comment-icon">
                         <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
                     </div>
 
                     <div className="user-comment-text">
                         User comment here
-                    </div> */}
+                    </div>
 
                 </React.Fragment>
             }) : !isOwner && user ? Object.values(thread).map((x) => {
                 return <React.Fragment key={x.id}>
 
                     <div className="current-thread-title">
-                        <h1>{x.post.title}</h1>
+                        <h1>{x.post.postTitle}</h1>
                     </div>
 
                     <div className="user-thread-icon center">
@@ -95,9 +96,10 @@ const ThreadDetails = () => {
                     </div>
 
                     <div className="thread-description">
-                        <h1>{x.post.comment}</h1>
+                        <h1>{x.post.postDescription}</h1>
                     </div>
 
+                    <UserComments />
 
                     {/* <div className="user-comment-icon">
                 <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
@@ -107,7 +109,7 @@ const ThreadDetails = () => {
                         Users comments here
                     </div>
 
-                    
+
                     {/* <textarea name="userComment" id="userComment" cols="30" rows="10"></textarea>
                     <button value='submit'></button> */}
                 </React.Fragment>

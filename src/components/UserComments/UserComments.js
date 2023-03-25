@@ -1,15 +1,10 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-
-
+import React, { useState, useEffect } from 'react';
 
 const UserComments = () => {
   return (
     <>
-      <div className="user-comments-area">
-        <textarea name="userComment" id="userComment" cols="30" rows="10"></textarea>
-      </div>
-      <button></button>
+      <textarea name="userComment" id="userComment" className="user-comments-area"></textarea>
+      <input className='comment-button' type="submit" value="Submit"></input>
     </>
 
   )

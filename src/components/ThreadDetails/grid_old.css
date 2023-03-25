@@ -13,10 +13,13 @@ body {
     "b c c"
     "edit c c"
     ". . ."
+    "user-img comment comment"
+    ". submit ."
+    ". . ."
     "img txt txt"
     ". txt txt";
   grid-template-columns: clamp(3rem, 100%, 5rem) 5fr 5fr;
-  grid-template-rows: 20fr 20fr 20fr 20fr 20fr 20fr;
+  grid-template-rows: 20fr 20fr 20fr 20fr 20fr 20fr 20fr 20fr 20fr 20fr;
 }
 
 .current-thread-title {
@@ -82,4 +85,48 @@ body {
   margin-top: 15px;
   margin-left: 15px;
   color: #ecf0f1;
+}
+
+.user-comments-area {
+  grid-area: comment;
+  resize: none;
+  border: none;
+  min-height: 45px;
+  max-height: 45px;
+  background-color: #24252a;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 15px;
+  margin-left: 15px;
+  color: #ecf0f1;
+}
+
+.user-comments-area:focus {
+  border: 1px solid rgba(0, 136, 169, 1);
+  box-shadow: 0 0 10px rgba(0, 136, 169, 1);
+}
+
+.comment-button {
+  grid-area: submit;
+  text-align: center;
+  color: #ecf0f1;
+  
+  padding: 10px;
+  margin-top: 15px;
+  margin-left: 15px;
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  margin-top: 15px;
+}
+
+.comment-button:hover {
+
+  background-color: rgba(0, 136, 169, 0.8);
+}
+
+.comment-button:active {
+  scale: 0.9;
 }
