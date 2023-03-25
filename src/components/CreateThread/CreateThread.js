@@ -44,14 +44,17 @@ const CreateThread = () => {
                     postedOn: new Date().toLocaleDateString(),
                     postedAt: new Date().toLocaleTimeString(),
                 },
-            });
-            // Adding post to the current user map posts
-            await updateDoc(userRef, {
-                posts: arrayUnion({
-                    postTitle: value.title,
-                    postDescription: value.comment
-                })
-            });
+            }).then(async (doc) => {
+                const docId = doc.id;
+                // Adding post to the current user map posts
+                await updateDoc(userRef, {
+                    posts: arrayUnion({
+                        postId: docId,
+                        postTitle: value.title,
+                        postDescription: value.comment
+                    })
+                });
+            })
             await batch.commit();
             Swal.fire({
                 position: 'top-end',

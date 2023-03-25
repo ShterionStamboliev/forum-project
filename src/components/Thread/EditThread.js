@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 import './Thread.css';
 
 
-
 const EditThread = () => {
     const { id } = useParams();
     const [value, setValue] = useState({
@@ -17,6 +16,8 @@ const EditThread = () => {
     });
     const navigate = useNavigate();
     const threadRef = doc(db, 'threads', id);
+
+
 
     const handleUpdate = async (e) => {
         e.preventDefault();
@@ -77,6 +78,7 @@ const EditThread = () => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     deleteDoc(threadRef);
+                    // DELETE POST DOCUMENT FROM USERS COLLECTION
                     swalWithBootstrapButtons.fire(
                         'Deleted!',
                         'Your file has been deleted.',
