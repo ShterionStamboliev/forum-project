@@ -28,6 +28,7 @@ const Forum = () => { // SHOW FORUM THREADS HERE
         }
     }, [threadsCollectionRef]);
 
+
     return (
         <div className="container">
             <div className="forum">

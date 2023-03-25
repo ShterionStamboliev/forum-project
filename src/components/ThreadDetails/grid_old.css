@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap");
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+.wrapper {
+  display: grid;
+  margin: 10px auto 0 auto;
+  max-width: 70%;
+  grid-template-areas:
+    "a a ."
+    "b c c"
+    "edit c c"
+    ". . ."
+    "img txt txt"
+    ". txt txt";
+  grid-template-columns: clamp(3rem, 100%, 5rem) 5fr 5fr;
+  grid-template-rows: 20fr 20fr 20fr 20fr 20fr 20fr;
+}
+
+.current-thread-title {
+  background-color: #24252a;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 15px;
+  color: #ecf0f1;
+  grid-area: a;
+}
+
+.user-thread-icon {
+  grid-area: b;
+  text-align: center;
+  background-color: #24252a;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 15px;
+  max-height: 5rem;
+}
+
+.thread-description {
+  grid-area: c;
+  background-color: #24252a;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 15px;
+  margin-left: 15px;
+  color: #ecf0f1;
+}
+
+.thread-edit-button {
+  grid-area: edit;
+  text-align: center;
+  color: #ecf0f1;
+  padding: 10px;
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  margin-top: 15px;
+}
+
+.thread-edit-button:hover {
+  background-color: rgba(0, 136, 169, 0.8);
+}
+
+.user-comment-icon {
+  grid-area: img;
+  text-align: center;
+  background-color: #24252a;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 15px;
+}
+
+.user-comment-text {
+  grid-area: txt;
+  background-color: #24252a;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 15px;
+  margin-left: 15px;
+  color: #ecf0f1;
+}

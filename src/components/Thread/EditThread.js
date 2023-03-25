@@ -7,7 +7,7 @@ import { runEmptyFieldAlert } from '../../utils/alerts';
 import Swal from 'sweetalert2';
 import './Thread.css';
 
-const Thread = () => {
+const EditThread = () => {
     const { id } = useParams();
     const [value, setValue] = useState({
         title: '',
@@ -117,4 +117,4 @@ const Thread = () => {
     );
 };
 
-export default Thread;
+export default EditThread;

@@ -34,22 +34,22 @@ const CreateThread = () => {
             }
             await addDoc(threadsCollection, {
                 author: {
-                    name: auth?.currentUser?.email,
                     owner: auth?.currentUser?.uid,
+                    name: auth?.currentUser?.email,
                 },
                 post: {
                     title: value.title,
                     comment: value.comment,
+                    comments: [],
                     postedOn: new Date().toLocaleDateString(),
                     postedAt: new Date().toLocaleTimeString(),
-                    comments: []
                 },
             });
             // Adding post to the current user map posts
             await updateDoc(userRef, {
                 posts: arrayUnion({
                     threadTitle: value.title,
-                    comment: value.comment                    
+                    comment: value.comment
                 })
             });
             await batch.commit();

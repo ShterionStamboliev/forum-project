@@ -1,45 +1,118 @@
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { db } from '../../config/firebase';
-import './ThreadDetails.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/fontawesome-free-regular';
+import { UseAuth } from '../../contexts/AuthContext'
+import './grid_old.css'
+import { faPenSquare } from '@fortawesome/fontawesome-free-solid';
 
 const ThreadDetails = () => {
-
+    // QUERY TO CHECK IF THE CURRENT USER ID IS EQUAL TO THE CURRENT DOCUMENT OWNER ID 
+    const { user } = UseAuth();
     const { id } = useParams();
     const [thread, setThread] = useState([]);
+    const [usersComments, setUsersComments] = useState([]);
+    const [isOwner, setIsOwner] = useState(null);
 
     const threadRef = doc(db, 'threads', id);
+    const currentUserId = user?.uid;
 
-    const getDocumentData = async () => {
-        const dataRef = await getDoc(threadRef);
-        const dataValues = dataRef.data();
-        console.log(dataValues);
-    };
-    // useEffect(() => {
-    //     getDocumentData();
-    // }, []);
+    const owners = () => getDoc(threadRef)
+        .then((res) => {
+            const usr = res.get('author.owner');
+            const owner = usr === currentUserId;
+            return owner;
+        });
+
+    const prom = Promise.resolve(owners());
+    prom.then(function (val) {
+        const owner = val;
+        return owner;
+    });
+
+    useEffect(() => {
+        owners().then((res) => setIsOwner(res))
+    }, []);
+
+
+    useEffect(() => {
+        try {
+            const unsubscribe = onSnapshot(threadRef, (doc) => {
+                let arr = [];
+                arr.push({ ...doc.data(), id: doc.id });
+                setThread(arr);
+            });
+            return () => unsubscribe();
+        } catch (error) {
+            console.log(error.message);
+        }
+    }, []);
+
+    // PUT USERS COMMENTS IN COMMENTS COLLECTION AND SET THE DOC ID WITH THE CURRENT DOC ID
+    // THEN SET THE DOC WITH WRITEBATCH AND MAP THE COMMENTS INSIDE
+
 
     return (
-            <div className="wrapper">
+        <div className="wrapper">
+            {isOwner ? Object.values(thread).map((x) => {
+                return <React.Fragment key={x.id}>
 
-                <div className="current-thread-title">
-                    <h1>Forum threads</h1>
+                    <div className="current-thread-title">
+                        <h1>{x.post.title}</h1>
+                    </div>
+
+                    <div className="user-thread-icon center">
+                        <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
+                    </div>
+
+                    <div className="thread-description">
+                        <h1>{x.post.comment}</h1>
+                    </div>
+
+                    <Link to={`/forum/${id}/edit`} className='thread-edit-button'><FontAwesomeIcon icon={faPenSquare} /></Link>
+
+
+                    {/* <div className="user-comment-icon">
+                    <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
                 </div>
 
-                <div className="user-thread-icon center">
-                    {/* PUT USER IMAGE HERE  */}
-                </div>
+                <div className="user-comment-text">
+                    User comment here
+                </div> */}
 
-                <div className="thread-description">
-                    {/* PUT THREAD DESCRIPTION HERE */}description
-                    descriptiondescriptiondescriptiondescription
+                </React.Fragment>
+            }) : !isOwner && user ? Object.values(thread).map((x) => {
+                return <React.Fragment key={x.id}>
 
-                </div>
-                <Link to={`/forum/${id}/details`} className='thread-edit-button'>Edit thread</Link> 
-                {/* to search for icon */}
-            </div>
+                    <div className="current-thread-title">
+                        <h1>{x.post.title}</h1>
+                    </div>
+
+                    <div className="user-thread-icon center">
+                        <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
+                    </div>
+
+                    <div className="thread-description">
+                        <h1>{x.post.comment}</h1>
+                    </div>
+
+
+                    {/* <div className="user-comment-icon">
+                <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
+            </div> */}
+
+                    <div className="user-comment-text">
+                        Users comments here
+                    </div>
+                    
+                    {/* <textarea name="userComment" id="userComment" cols="30" rows="10"></textarea>
+                    <button value='submit'></button> */}
+                </React.Fragment>
+            }) : null}
+
+        </div>
     )
-}
-
+};
 export default ThreadDetails;

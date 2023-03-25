@@ -5,7 +5,7 @@ import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import CreateThread from './components/CreateThread/CreateThread';
 import Footer from './components/Footer/Footer';
-import Thread from './components/Thread/Thread';
+import EditThread from './components/Thread/EditThread';
 import Navigation from './components/Navigation/Navigation';
 import Account from './components/Account/Account';
 import { AuthContextProvider } from './contexts/AuthContext';
@@ -25,7 +25,7 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='/forum' element={<Forum />} />
                     <Route path='/forum/:id' element={<ThreadDetails />} />  {/* PUT THREAD DETAILS HERE */}
-                    <Route path='/forum/:id/details' element={<Thread />} />
+                    <Route path='/forum/:id/edit' element={<EditThread />} />
                     <Route path='/create-thread' element={<RouteGuard> <CreateThread /> </RouteGuard>} />
                     <Route path='/account' element={<RouteGuard>  <Account /></RouteGuard>} />
                     <Route path='/register' element={<Register />} />
