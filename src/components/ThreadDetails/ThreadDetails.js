@@ -20,6 +20,7 @@ const ThreadDetails = () => {
     const threadRef = doc(db, 'threads', id);
     const currentUserId = user?.uid;
 
+
     const owners = () => getDoc(threadRef)
         .then((res) => {
             const usr = res.get('author.owner');
@@ -61,7 +62,7 @@ const ThreadDetails = () => {
                 return <React.Fragment key={x.id}>
 
                     <div className="current-thread-title">
-                        <h1>{x.post.postTitle}</h1>
+                        <h1>{x.post.postTitle} </h1>
                     </div>
 
                     <div className="user-thread-icon center">
@@ -88,7 +89,7 @@ const ThreadDetails = () => {
                 return <React.Fragment key={x.id}>
 
                     <div className="current-thread-title">
-                        <h1>{x.post.postTitle}</h1>
+                        {x.post.postTitle}
                     </div>
 
                     <div className="user-thread-icon center">
@@ -96,7 +97,7 @@ const ThreadDetails = () => {
                     </div>
 
                     <div className="thread-description">
-                        <h1>{x.post.postDescription}</h1>
+                        {x.post.postDescription}
                     </div>
 
                     <UserComments />

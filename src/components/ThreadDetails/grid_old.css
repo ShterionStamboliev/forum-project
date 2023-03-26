@@ -9,26 +9,27 @@ body {
   margin: 10px auto 0 auto;
   max-width: 70%;
   grid-template-areas:
-    "a a ."
-    "b c c"
-    "edit c c"
-    ". . ."
-    "user-img comment comment"
-    ". . submit"
-    ". . ."
-    "img txt txt"
-    ". txt txt";
-  grid-template-columns: clamp(3rem, 100%, 5rem) 5fr 5fr;
-  grid-template-rows: 20fr 20fr 20fr 20fr 20fr 20fr 20fr 20fr 20fr 20fr;
+    ". a . ."
+    "b c c c"
+    "edit c c c"
+    ". . . ."
+    "user-img comment comment comment"
+    ". . . submit"
+    ". . . ."
+    "img txt txt txt"
+    ". txt txt txt";
+  grid-template-columns: clamp(3rem, 100%, 5rem) 5fr 5fr 5fr;
+  grid-template-rows: clamp(3rem, 100%, 5rem) 5fr 5fr 5fr 5fr 5fr 5fr 5fr 5fr;
 }
 
 .current-thread-title {
+  grid-area: a;
+  margin-left: 15px;
   background-color: #24252a;
   padding: 5px;
   border-radius: 5px;
-  font-size: 15px;
+  font-size: 25px;
   color: #ecf0f1;
-  grid-area: a;
 }
 
 .user-thread-icon {
@@ -43,6 +44,7 @@ body {
 
 .thread-description {
   grid-area: c;
+  font-size: 18px;
   background-color: #24252a;
   border-radius: 5px;
   padding: 10px;
@@ -89,6 +91,7 @@ body {
 
 .user-comments-area {
   grid-area: comment;
+  font-size: 16px;
   resize: none;
   border: none;
   outline: none;
@@ -129,11 +132,10 @@ body {
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease 0s;
-  position: relative;
-  left: 346px;
   font-family: "Montserrat", sans-serif;
   font-weight: lighter;
   font-size: 15px;
+  margin-left: 572px;
 }
 
 .comment-button:hover {
