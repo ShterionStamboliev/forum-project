@@ -20,7 +20,6 @@ const ThreadDetails = () => {
     const threadRef = doc(db, 'threads', id);
     const currentUserId = user?.uid;
 
-
     const owners = () => getDoc(threadRef)
         .then((res) => {
             const usr = res.get('author.owner');
@@ -35,7 +34,10 @@ const ThreadDetails = () => {
     });
 
     useEffect(() => {
-        owners().then((res) => setIsOwner(res))
+        const abortController = new AbortController();
+        owners().then((res) => setIsOwner(res));
+
+        return () => abortController.abort();
     }, []);
 
 
@@ -62,7 +64,7 @@ const ThreadDetails = () => {
                 return <React.Fragment key={x.id}>
 
                     <div className="current-thread-title">
-                        <h1>{x.post.postTitle} </h1>
+                        {x.post.postTitle}
                     </div>
 
                     <div className="user-thread-icon center">
@@ -70,7 +72,7 @@ const ThreadDetails = () => {
                     </div>
 
                     <div className="thread-description">
-                        <h1>{x.post.postDescription}</h1>
+                        {x.post.postDescription}
                     </div>
 
                     <Link to={`/forum/${id}/edit`} className='thread-edit-button'><FontAwesomeIcon icon={faPenSquare} /></Link>
@@ -113,9 +115,6 @@ const ThreadDetails = () => {
 
                     </div>
 
-
-                    {/* <textarea name="userComment" id="userComment" cols="30" rows="10"></textarea>
-                    <button value='submit'></button> */}
                 </React.Fragment>
             }) : null}
 

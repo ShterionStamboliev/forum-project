@@ -2,8 +2,8 @@ import { collection, query, onSnapshot } from "firebase/firestore";
 import { db } from '../../config/firebase';
 import { useState, useEffect } from "react";
 import { BsCardText } from 'react-icons/bs';
-import './Template.css';
 import { Link } from "react-router-dom";
+import './Template.css';
 
 const Forum = () => { // SHOW FORUM THREADS HERE
     const [threads, setThreads] = useState([]);
@@ -28,12 +28,11 @@ const Forum = () => { // SHOW FORUM THREADS HERE
         }
     }, [threadsCollectionRef]);
 
-
     return (
         <div className="container">
             <div className="forum">
                 <div className="forum-title">
-                    <h1>Forum threads</h1>
+                    Forum threads
                 </div>
                 {threads.length > 0 ?
                     Object.values(threads).map((x) => {
@@ -42,13 +41,12 @@ const Forum = () => { // SHOW FORUM THREADS HERE
                                 <BsCardText style={{ fontSize: '25px', color: '#ecf0f1' }} />
                             </div>
                             <div className="forum-description subform-column">
-                                <h1><Link to={`/forum/` + x.id} className="thread-title">{x.post.postTitle}</Link></h1>
+                                <Link to={`/forum/` + x.id} className="thread-title">{x.post.postTitle}</Link>
                             </div>
                             <div className="forum-post subform-column center">
-                                <span>Comments {x.post.comments.length}</span>
                             </div>
                             <div className="forum-post-info subform-column">
-                                <b>Posted by {x.author.name} </b>
+                                Posted by {x.author.name}
                                 <br />
                                 On {x.post.postedOn} at {x.post.postedAt}
                             </div>

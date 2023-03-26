@@ -1,37 +1,41 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { faUser } from '@fortawesome/fontawesome-free-regular';
 import { UseAuth } from '../../contexts/AuthContext';
-import { collection, getDocs } from 'firebase/firestore';
+import { doc, setDoc, writeBatch, arrayUnion } from 'firebase/firestore';
 import { db } from '../../config/firebase';
-
+import { useParams } from 'react-router-dom';
 
 const UserComments = () => {
     const [commentText, setCommentText] = useState('');
     const { user } = UseAuth();
+    const { id } = useParams();
 
-    const commentsCollectionRef = collection(db, 'comments');
-    
-    const getCommentsDocs = async () => {
-        const getComments = await getDocs(commentsCollectionRef)
-        getComments.forEach((doc) => {
-            console.log(doc.data());
-        })
-    }
-    getCommentsDocs();
-
+    const batch = writeBatch(db);
+    const commentsRef = doc(db, 'comments', id);
 
     const currentUserId = user.uid;
     const currentUserEmail = user.email;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+
+        await setDoc(commentsRef, {
+            comments: arrayUnion(
+                {
+                    comment: commentText,
+                    author: currentUserEmail
+                }
+            )
+        }, { merge: true })
+        await batch.commit();
+        setCommentText('');
     };
 
     const handleChange = (e) => {
         setCommentText(e.target.value);
     };
-
 
     return (
         <>
@@ -41,7 +45,6 @@ const UserComments = () => {
             <textarea value={commentText} onChange={handleChange} name="textarea" id="textarea" className="user-comments-area"></textarea>
             <input className='comment-button' type="submit" value="Submit" onClick={handleSubmit}></input>
         </>
-
     )
 };
 
