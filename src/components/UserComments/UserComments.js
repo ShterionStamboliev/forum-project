@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { faUser } from '@fortawesome/fontawesome-free-regular';
 import { UseAuth } from '../../contexts/AuthContext';
-import { doc, setDoc, writeBatch, arrayUnion } from 'firebase/firestore';
+import { doc, setDoc, writeBatch, arrayUnion, updateDoc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { useParams } from 'react-router-dom';
 
@@ -11,21 +11,23 @@ const UserComments = () => {
     const { user } = UseAuth();
     const { id } = useParams();
 
-    const batch = writeBatch(db);
-    const commentsRef = doc(db, 'comments', id);
-
     const currentUserId = user.uid;
     const currentUserEmail = user.email;
+
+    const batch = writeBatch(db);
+    const threadRef = doc(db, 'threads', id, 'comments', currentUserId);
+    console.log(threadRef);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
 
-        await setDoc(commentsRef, {
+        batch.set(threadRef, {
             comments: arrayUnion(
                 {
-                    comment: commentText,
-                    author: currentUserEmail
+                    author: currentUserEmail,
+                    comment: commentText
                 }
             )
         }, { merge: true })

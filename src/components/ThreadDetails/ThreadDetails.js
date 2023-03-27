@@ -1,4 +1,4 @@
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { db } from '../../config/firebase';
@@ -13,8 +13,7 @@ const ThreadDetails = () => {
     // QUERY TO CHECK IF THE CURRENT USER ID IS EQUAL TO THE CURRENT DOCUMENT OWNER ID 
     const { user } = UseAuth();
     const { id } = useParams();
-    const [thread, setThread] = useState([]);
-    const [usersComments, setUsersComments] = useState([]);
+    const [thread, setThread] = useState({});
     const [isOwner, setIsOwner] = useState(null);
 
     const threadRef = doc(db, 'threads', id);
@@ -40,12 +39,12 @@ const ThreadDetails = () => {
         return () => abortController.abort();
     }, []);
 
-
     useEffect(() => {
         try {
             const unsubscribe = onSnapshot(threadRef, (doc) => {
                 let arr = [];
                 arr.push({ ...doc.data(), id: doc.id });
+                console.log(arr);
                 setThread(arr);
             });
             return () => unsubscribe();
@@ -56,7 +55,6 @@ const ThreadDetails = () => {
 
     // PUT USERS COMMENTS IN COMMENTS COLLECTION AND SET THE DOC ID WITH THE CURRENT DOC ID
     // THEN SET THE DOC WITH WRITEBATCH AND MAP THE COMMENTS INSIDE
-
 
     return (
         <div className="wrapper">
@@ -77,47 +75,20 @@ const ThreadDetails = () => {
 
                     <Link to={`/forum/${id}/edit`} className='thread-edit-button'><FontAwesomeIcon icon={faPenSquare} /></Link>
 
-
                     <div className="user-comment-icon">
                         <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
                     </div>
 
                     <div className="user-comment-text">
-                        User comment here
+                        {/* COMMENT */}
                     </div>
 
-                </React.Fragment>
-            }) : !isOwner && user ? Object.values(thread).map((x) => {
-                return <React.Fragment key={x.id}>
-
-                    <div className="current-thread-title">
-                        {x.post.postTitle}
-                    </div>
-
-                    <div className="user-thread-icon center">
-                        <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
-                    </div>
-
-                    <div className="thread-description">
-                        {x.post.postDescription}
-                    </div>
-
-                    <UserComments />
-
-                    <div className="user-comment-icon">
-                        <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
-                    </div>
-
-                    <div className="user-comment-text">
-                        Users comments here
-                    </div>
                     <div className="user-comment-name">
-
+                        {/* AUTHOR NAME */}
                     </div>
 
                 </React.Fragment>
-            }) : null}
-
+            }) : <UserComments />}
         </div>
     )
 };

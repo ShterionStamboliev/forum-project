@@ -26,6 +26,7 @@ function App() {
                     <Route path='/forum' element={<Forum />} />
                     <Route path='/forum/:id' element={<ThreadDetails />} />  {/* PUT THREAD DETAILS HERE */}
                     <Route path='/forum/:id/edit' element={<EditThread />} />
+                    
                     <Route path='/create-thread' element={<RouteGuard> <CreateThread /> </RouteGuard>} />
                     <Route path='/account' element={<RouteGuard>  <Account /></RouteGuard>} />
                     <Route path='/register' element={<Register />} />

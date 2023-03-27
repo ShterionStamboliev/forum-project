@@ -72,13 +72,23 @@ const CreateThread = () => {
 
     return (
         <div className="create-post-container">
+            
             <div>
                 <h1 className="create-post-title">Create new post</h1>
             </div>
+
             <div className="post-title">
                 <label className="post-title-label" htmlFor="post-title">Thread title: </label>
-                <input value={value.title} onChange={handleEventSubmit} className="post-title-input" type="text" name="title" id="title" placeholder="Enter thread title..." />
+                <input 
+                value={value.title} 
+                onChange={handleEventSubmit} 
+                className="post-title-input" 
+                type="text" 
+                name="title" 
+                id="title" 
+                placeholder="Enter thread title..." />
             </div>
+
             <div className="post-comment">
                 <label className="post-comment-label" htmlFor="post-comment">Comment: </label>
                 <textarea value={value.comment} onChange={handleEventSubmit} className="post-comment-input" type="text" name="comment" id="comment" cols="30" rows="10" placeholder="Leave a comment..."></textarea>
