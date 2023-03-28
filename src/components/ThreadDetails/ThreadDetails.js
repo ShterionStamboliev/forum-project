@@ -4,13 +4,13 @@ import { Link, useParams } from 'react-router-dom';
 import { db } from '../../config/firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/fontawesome-free-regular';
-import { UseAuth } from '../../contexts/AuthContext'
+import { UseAuth } from '../../contexts/AuthContext';
+import CommentsLoader from '../CommentsLoader/CommentsLoader';
 import UserComments from '../UserComments/UserComments';
 import './grid_old.css'
 import { faPenSquare } from '@fortawesome/fontawesome-free-solid';
 
 const ThreadDetails = () => {
-    // QUERY TO CHECK IF THE CURRENT USER ID IS EQUAL TO THE CURRENT DOCUMENT OWNER ID 
     const { user } = UseAuth();
     const { id } = useParams();
     const [thread, setThread] = useState({});
@@ -44,7 +44,6 @@ const ThreadDetails = () => {
             const unsubscribe = onSnapshot(threadRef, (doc) => {
                 let arr = [];
                 arr.push({ ...doc.data(), id: doc.id });
-                console.log(arr);
                 setThread(arr);
             });
             return () => unsubscribe();
@@ -75,17 +74,7 @@ const ThreadDetails = () => {
 
                     <Link to={`/forum/${id}/edit`} className='thread-edit-button'><FontAwesomeIcon icon={faPenSquare} /></Link>
 
-                    <div className="user-comment-icon">
-                        <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
-                    </div>
-
-                    <div className="user-comment-text">
-                        {/* COMMENT */}
-                    </div>
-
-                    <div className="user-comment-name">
-                        {/* AUTHOR NAME */}
-                    </div>
+                    <CommentsLoader />
 
                 </React.Fragment>
             }) : <UserComments />}
