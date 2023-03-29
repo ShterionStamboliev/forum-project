@@ -1,14 +1,12 @@
 import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { db } from '../../config/firebase';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/fontawesome-free-regular';
 import { UseAuth } from '../../contexts/AuthContext';
-import CommentsLoader from '../CommentsLoader/CommentsLoader';
-import UserComments from '../UserComments/UserComments';
-import './grid_old.css'
-import { faPenSquare } from '@fortawesome/fontawesome-free-solid';
+import OwnerView from '../CommentsViews/OwnerView';
+import GuestView from '../CommentsViews/GuestView';
+import LoggedInUserView from '../CommentsViews/LoggedInUserView';
+import './ThreadDetails.css'
 
 const ThreadDetails = () => {
     const { user } = UseAuth();
@@ -54,31 +52,13 @@ const ThreadDetails = () => {
 
     return (
         <div className="wrapper">
-            {isOwner ? Object.values(thread).map((x) => {
-                return <React.Fragment key={x.id}>
-                    <div className="grid-wrapper">
-                        <div className="current-thread-title">
-                            {x.post.postTitle}
-                        </div>
-
-                        <div className="user-thread-icon center">
-                            <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
-                        </div>
-
-                        <div className="thread-description">
-                            {x.post.postDescription}
-                        </div>
-
-                        <Link to={`/forum/${id}/edit`} className='thread-edit-button'><FontAwesomeIcon icon={faPenSquare} /></Link>
-                    </div>
-
-                    <div className="grid-wrapper-comments" key={x.id}>
-                        <CommentsLoader />
-                    </div>
-
-                </React.Fragment>
-
-            }) : <UserComments isOwner={isOwner} thread={thread} />}
+            {isOwner ?
+                <OwnerView thread={thread} /> :
+                !isOwner && user ? 
+                <LoggedInUserView thread={thread} /> :
+                    !isOwner && !user ? 
+                    <GuestView thread={thread} /> :
+                        null}
         </div>
     )
 };

@@ -1,6 +1,6 @@
 import { UseAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import { runSignOutAlert } from '../../utils/alerts';
 
 const Logout = () => {
     const { signOutUser } = UseAuth();
@@ -9,27 +9,11 @@ const Logout = () => {
     const handleLogout = () => {
         signOutUser()
             .then(() => {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top',
-                    showConfirmButton: false,
-                    timer: 2000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Signed out successfully'
-                })
+                runSignOutAlert();
                 navigate("/");
             }).catch((error) => {
                 console.log(error.message);
             });
-
     };
 
     return (

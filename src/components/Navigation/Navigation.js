@@ -6,15 +6,6 @@ import './Navigation.css';
 const UserAuth = () => {
     const { user} = UseAuth();
 
-    // const handleLogout = () => {
-    //     signOutUser()
-    //         .then(() => {
-    //             navigate("/");
-    //         }).catch((error) => {
-    //             console.log(error.message);
-    //         });
-    // };
-
     return (
         <header className='nav__box'>
             <Link to='/'>

@@ -3,9 +3,9 @@ import { db } from '../../config/firebase';
 import { useState, useEffect } from "react";
 import { BsCardText } from 'react-icons/bs';
 import { Link } from "react-router-dom";
-import './Template.css';
+import './Forum.css';
 
-const Forum = () => { // SHOW FORUM THREADS HERE
+const Forum = () => {
     const [threads, setThreads] = useState([]);
     const threadsCollectionRef = collection(db, "threads");
 

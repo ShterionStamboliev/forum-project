@@ -7,7 +7,7 @@ import { db } from '../../config/firebase';
 import { useParams } from 'react-router-dom';
 import CommentsLoader from '../CommentsLoader/CommentsLoader';
 
-const UserComments = ({ isOwner, thread }) => {
+const LoggedInUserView = ({ thread }) => {
     const [commentText, setCommentText] = useState('');
     const { user } = UseAuth();
     const { id } = useParams();
@@ -38,7 +38,7 @@ const UserComments = ({ isOwner, thread }) => {
 
     return (
         <>
-            {!isOwner && user ? Object.values(thread).map((x) => {
+            {Object.values(thread).map((x) => {
                 return <React.Fragment key={x.id}>
                     <div className="grid-wrapper">
                         <div className="current-thread-title">
@@ -68,9 +68,9 @@ const UserComments = ({ isOwner, thread }) => {
 
                 </React.Fragment>
 
-            }) : null}
+            })}
         </>
     )
 
 };
-export default UserComments;
+export default LoggedInUserView;

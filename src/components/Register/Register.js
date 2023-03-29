@@ -3,8 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { db } from '../../config/firebase';
 import { setDoc, doc } from "firebase/firestore";
 import { UseAuth } from "../../contexts/AuthContext";
-import Swal from "sweetalert2";
-import { runEmptyFieldAlert } from "../../utils/alerts";
+import { runEmailLengthError, runEmptyEmailField, runEmptyPasswordField, runEmptyFirstNameError, runEmptyLastNameError, runEmptyUsernameError, runEmptyConfirmPasswordField, runPasswordEqualityCheck, runSuccessfulRegistration, runPasswordLengthError } from "../../utils/alerts";
 import './Register.css'
 
 const Register = () => {
@@ -27,11 +26,40 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (value.email === '' || value.password === '' || value.firstName === '' || value.lastName === '' || value.username === '' || value.confirmPassword === '') {
-                runEmptyFieldAlert();
-                return;
+
+            if (value.email.length < 10) {
+                return runEmailLengthError();
+            };
+            if (value.email === '') {
+                return runEmptyEmailField();
             }
-            // TODO::: DO INPUT FIELD CHECK e.q (email.length < 5)
+
+            if (value.password.length < 6) {
+                return runPasswordLengthError();
+            };
+            if (value.password === '') {
+                return runEmptyPasswordField();
+            }
+            
+            if (value.confirmPassword === '') {
+                return runEmptyConfirmPasswordField();
+            };
+
+            if (value.password !== value.confirmPassword) {
+                return runPasswordEqualityCheck();
+            }
+            if (value.firstName === '') {
+                return runEmptyFirstNameError();
+            };
+
+            if (value.lastName === '') {
+                return runEmptyLastNameError();
+            };
+
+            if (value.username === '') {
+                return runEmptyUsernameError();
+            };
+
             await createUser(value.email, value.password)
                 .then(async (userCredentials) => {
                     const user = userCredentials.user;
@@ -46,22 +74,7 @@ const Register = () => {
                         posts: []
                     });
                 });
-
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            });
-            Toast.fire({
-                icon: 'success',
-                title: 'Registration successfull!'
-            });
+                runSuccessfulRegistration();
             navigate('/');
         } catch (error) {
             console.log(error.message);
