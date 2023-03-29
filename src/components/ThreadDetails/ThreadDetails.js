@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, onSnapshot } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { db } from '../../config/firebase';
@@ -52,32 +52,33 @@ const ThreadDetails = () => {
         }
     }, []);
 
-    // PUT USERS COMMENTS IN COMMENTS COLLECTION AND SET THE DOC ID WITH THE CURRENT DOC ID
-    // THEN SET THE DOC WITH WRITEBATCH AND MAP THE COMMENTS INSIDE
-
     return (
         <div className="wrapper">
             {isOwner ? Object.values(thread).map((x) => {
                 return <React.Fragment key={x.id}>
+                    <div className="grid-wrapper">
+                        <div className="current-thread-title">
+                            {x.post.postTitle}
+                        </div>
 
-                    <div className="current-thread-title">
-                        {x.post.postTitle}
+                        <div className="user-thread-icon center">
+                            <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
+                        </div>
+
+                        <div className="thread-description">
+                            {x.post.postDescription}
+                        </div>
+
+                        <Link to={`/forum/${id}/edit`} className='thread-edit-button'><FontAwesomeIcon icon={faPenSquare} /></Link>
                     </div>
 
-                    <div className="user-thread-icon center">
-                        <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
+                    <div className="grid-wrapper-comments" key={x.id}>
+                        <CommentsLoader />
                     </div>
-
-                    <div className="thread-description">
-                        {x.post.postDescription}
-                    </div>
-
-                    <Link to={`/forum/${id}/edit`} className='thread-edit-button'><FontAwesomeIcon icon={faPenSquare} /></Link>
-
-                    <CommentsLoader />
 
                 </React.Fragment>
-            }) : <UserComments />}
+
+            }) : <UserComments isOwner={isOwner} thread={thread} />}
         </div>
     )
 };

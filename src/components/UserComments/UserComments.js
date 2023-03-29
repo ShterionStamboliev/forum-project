@@ -5,8 +5,9 @@ import { UseAuth } from '../../contexts/AuthContext';
 import { doc, writeBatch, arrayUnion } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { useParams } from 'react-router-dom';
+import CommentsLoader from '../CommentsLoader/CommentsLoader';
 
-const UserComments = () => {
+const UserComments = ({ isOwner, thread }) => {
     const [commentText, setCommentText] = useState('');
     const { user } = UseAuth();
     const { id } = useParams();
@@ -15,36 +16,6 @@ const UserComments = () => {
 
     const batch = writeBatch(db);
     const threadRef = doc(db, 'threads', id, 'comments', id);
-
-
-    // ********************************************************
-
-    // const col = query(collection(db, `threads/${id}/comments`));
-
-    // const getSnap = async () => {
-    //     const qSnap = await getDocs(col);
-    //     let arr = [];
-    //     qSnap.forEach((doc) => {
-    //         arr.push({ ...doc.data()['comments'] });
-    //     });
-    //     for (const key of arr.values()) {
-    //         let a = Object.values(key);
-    //         for (const v of a) {
-    //             setAllComments(v);
-    //         }
-    //     }
-    // }
-    // getSnap();
-    // useEffect(() => {
-    //     const a = new AbortController();
-    //     getSnap();
-
-    //     return () => a.abort();
-    // }, []);
-    //////// TO CHECK TOMORROW
-
-
-    // ****************************************************************
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -67,13 +38,39 @@ const UserComments = () => {
 
     return (
         <>
-            <div className="user-comments-img">
-                <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
-            </div>
-            <textarea value={commentText} onChange={handleChange} name="textarea" id="textarea" className="user-comments-area"></textarea>
-            <input className='comment-button' type="submit" value="Submit" onClick={handleSubmit}></input>
+            {!isOwner && user ? Object.values(thread).map((x) => {
+                return <React.Fragment key={x.id}>
+                    <div className="grid-wrapper">
+                        <div className="current-thread-title">
+                            {x.post.postTitle}
+                        </div>
+
+                        <div className="user-thread-icon center">
+                            <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
+                        </div>
+
+                        <div className="thread-description">
+                            {x.post.postDescription}
+                        </div>
+                    </div>
+
+                    <div className="grid-wrapper-comment">
+                        <div className="user-comments-img">
+                            <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
+                        </div>
+                        <textarea value={commentText} onChange={handleChange} name="textarea" id="textarea" className="user-comments-area" placeholder='Leave a comment...'></textarea>
+                        <input className='comment-button' type="submit" value="Submit" onClick={handleSubmit}></input>
+                    </div>
+
+                    <div className="grid-wrapper-comments" key={x.id}>
+                        <CommentsLoader />
+                    </div>
+
+                </React.Fragment>
+
+            }) : null}
         </>
     )
-};
 
+};
 export default UserComments;
