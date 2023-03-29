@@ -103,38 +103,38 @@ const EditThread = () => {
                     <h1 className="update-post">Update post</h1>
                 </div>
                 <div className="update-post-title">
-                    <label 
-                    className="update-post-title-label" 
-                    htmlFor="update-post-title">Update title: 
+                    <label
+                        className="update-post-title-label"
+                        htmlFor="update-post-title">Update title:
                     </label>
 
-                    <input 
-                    value={value.title} 
-                    onChange={handleEventSubmit} 
-                    className="update-post-title-input" 
-                    type="text" 
-                    name="title" 
-                    id="updateTitle" 
-                    placeholder="Update title..."
+                    <input
+                        value={value.title}
+                        onChange={handleEventSubmit}
+                        className="update-post-title-input"
+                        type="text"
+                        name="title"
+                        id="updateTitle"
+                        placeholder="Update title..."
                     />
                 </div>
 
                 <div className="update-post-comment">
-                    <label 
-                    className="update-post-comment-label" 
-                    htmlFor="update-post-comment">Update comment: 
+                    <label
+                        className="update-post-comment-label"
+                        htmlFor="update-post-comment">Update comment:
                     </label>
-                    
-                    <textarea 
-                    value={value.comment} 
-                    onChange={handleEventSubmit} 
-                    className="update-post-comment-input" 
-                    type="text" 
-                    name="comment" 
-                    id="updateComment" 
-                    cols="30" 
-                    rows="10" 
-                    placeholder="Update comment...">
+
+                    <textarea
+                        value={value.comment}
+                        onChange={handleEventSubmit}
+                        className="update-post-comment-input"
+                        type="text"
+                        name="comment"
+                        id="updateComment"
+                        cols="30"
+                        rows="10"
+                        placeholder="Update comment...">
                     </textarea>
                 </div>
                 <input type="submit" onClick={handleUpdate} className="update-btn-submit-post" value="Update" />

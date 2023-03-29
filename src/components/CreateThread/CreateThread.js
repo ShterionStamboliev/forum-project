@@ -2,7 +2,11 @@ import { useState } from "react";
 import { db, auth } from '../../config/firebase';
 import { collection, addDoc, updateDoc, writeBatch, doc, arrayUnion } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { runSuccessfulPostCreation, runEmptyThreadTitleInput, runEmptyDescriptionInput } from "../../utils/alerts";
+import {
+    runSuccessfulPostCreation,
+    runEmptyThreadTitleInput,
+    runEmptyDescriptionInput
+} from "../../utils/alerts";
 import './Create.css';
 
 const CreateThread = () => {
@@ -31,8 +35,8 @@ const CreateThread = () => {
             } else if (value.description === '') {
                 runEmptyDescriptionInput();
                 return;
-            } 
-            
+            }
+
             await addDoc(threadsCollection, {
                 author: {
                     owner: auth?.currentUser?.uid,
@@ -47,7 +51,6 @@ const CreateThread = () => {
                 },
             }).then(async (doc) => {
                 const docId = doc.id;
-                // Adding post to the current user map posts
                 await updateDoc(userRef, {
                     posts: arrayUnion({
                         postId: docId,
@@ -55,7 +58,7 @@ const CreateThread = () => {
                         postDescription: value.description
                     })
                 });
-            })
+            });
             await batch.commit();
             runSuccessfulPostCreation();
             setValue('');
@@ -89,16 +92,16 @@ const CreateThread = () => {
             <div className="post-comment">
                 <label className="post-comment-label" htmlFor="post-comment">Description: </label>
 
-                <textarea 
-                value={value.description} 
-                onChange={handleEventSubmit} 
-                className="post-comment-input" 
-                type="text" 
-                name="description" 
-                id="comment" 
-                cols="30" 
-                rows="10" 
-                placeholder="Set thread description...">
+                <textarea
+                    value={value.description}
+                    onChange={handleEventSubmit}
+                    className="post-comment-input"
+                    type="text"
+                    name="description"
+                    id="comment"
+                    cols="30"
+                    rows="10"
+                    placeholder="Set thread description...">
                 </textarea>
 
             </div>

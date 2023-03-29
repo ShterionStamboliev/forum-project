@@ -53,7 +53,8 @@ const Forum = () => {
                         </div>
                     }) :
                     <div className="no-posts">
-                        There are no threads yet. Be the first one to make a <Link to='/create-thread' style={{ textDecoration: 'underline', fontSize: '25px' }}><i>post!</i></Link>
+                        There are no threads yet. Be the first one to make a <Link to='/create-thread' 
+                        style={{ textDecoration: 'underline', fontSize: '25px' }}><i>post!</i></Link>
                     </div>
                 }
             </div>
