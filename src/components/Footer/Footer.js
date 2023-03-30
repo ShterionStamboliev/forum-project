@@ -8,14 +8,21 @@ const Footer = () => {
     const [color, setColor] = useState(`rgba(0, 136, 169, 1)`);
 
     return (
-        <section className="footer">
-            <div className="socials">
-                <Link to=''><FaInstagram style={{ color: color }} /></Link>
-                <Link to=''><FaFacebook style={{ color: color }} /></Link>
-                <Link to=''><FaTwitter style={{ color: color }} /></Link>
-            </div>
+        <div className="footer-wrapper">
 
-            <ul className="socials-list">
+            <ul className="socials">
+                <li>
+                    <Link to=''><FaInstagram style={{ color: color }} /></Link>
+                </li>
+                <li>
+                    <Link to=''><FaFacebook style={{ color: color }} /></Link>
+                </li>
+                <li>
+                    <Link to=''><FaTwitter style={{ color: color }} /></Link>
+                </li>
+            </ul>
+
+            <ul className="other-info">
                 <li>
                     <Link to=''>Services</Link>
                 </li>
@@ -26,10 +33,11 @@ const Footer = () => {
                     <Link to=''>Privacy Policy</Link>
                 </li>
             </ul>
+
             <p className="copyright">
                 Stamboliev @ 2023
             </p>
-        </section>
+        </div>
     );
 };
 

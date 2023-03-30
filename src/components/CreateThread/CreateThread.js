@@ -45,7 +45,6 @@ const CreateThread = () => {
                 post: {
                     postTitle: value.title,
                     postDescription: value.description,
-                    comments: [],
                     postedOn: new Date().toLocaleDateString(),
                     postedAt: new Date().toLocaleTimeString(),
                 },

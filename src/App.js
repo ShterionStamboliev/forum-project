@@ -17,7 +17,7 @@ import ThreadDetails from './components/ThreadDetails/ThreadDetails';
 function App() {
 
     return (
-        <>
+        <main>
             <AuthContextProvider>
                 <Navigation />
 
@@ -37,7 +37,7 @@ function App() {
 
                 <Footer />
             </AuthContextProvider>
-        </>
+        </main>
     );
 };
 

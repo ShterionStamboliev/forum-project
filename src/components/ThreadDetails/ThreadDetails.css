@@ -2,13 +2,13 @@
 
 body {
   font-family: "Montserrat", sans-serif;
-  scroll-behavior: smooth;
 }
 
 .wrapper {
   display: grid;
   margin: 10px auto 0 auto;
   max-width: 70%;
+  padding-bottom: 150px;
 }
 
 .grid-wrapper {

@@ -1,4 +1,4 @@
-import { collection, query, onSnapshot } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from '../../config/firebase';
 import { useState, useEffect } from "react";
 import { BsCardText } from 'react-icons/bs';
@@ -11,22 +11,21 @@ const Forum = () => {
 
     useEffect(() => {
         try {
-            const threadData = query(threadsCollectionRef);
-            const unsubscribe = onSnapshot(threadData, (querySnapshot) => {
-                let threadsArray = [];
-                querySnapshot.forEach((doc) => {
-                    threadsArray.push({
-                        id: doc.id,
-                        ...doc.data()
+            getDocs(threadsCollectionRef)
+            .then((res) => {
+                const threadsArr = [];
+                    res.forEach((doc) => {
+                        threadsArr.push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
                     });
-                });
-                setThreads(threadsArray);
-            });
-            return () => unsubscribe();
+                    setThreads(threadsArr);
+                })
         } catch (error) {
             console.log(error.message);
         }
-    }, [threadsCollectionRef]);
+    }, []);
 
     return (
         <div className="container">
@@ -63,3 +62,19 @@ const Forum = () => {
 };
 
 export default Forum;
+
+
+
+
+            // const threadData = query(threadsCollectionRef);
+            // const unsubscribe = onSnapshot(threadData, (querySnapshot) => {
+            //     let threadsArray = [];
+            //     querySnapshot.forEach((doc) => {
+            //         threadsArray.push({
+            //             id: doc.id,
+            //             ...doc.data()
+            //         });
+            //     });
+            //     setThreads(threadsArray);
+            // });
+            // return () => unsubscribe();
