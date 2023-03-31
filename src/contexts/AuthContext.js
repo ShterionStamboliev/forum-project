@@ -4,8 +4,11 @@ import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut,
+    updateProfile
 } from 'firebase/auth'
 import { auth } from "../config/firebase";
+import { storage } from "../config/firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const UserContext = createContext();
 
@@ -37,6 +40,18 @@ export const AuthContextProvider = ({ children }) => {
             {children}
         </UserContext.Provider>
     );
+};
+
+export async function uploadImage(file, currentUser, setLoading) {
+    const fileRef = ref(storage, `${currentUser.uid}/images/` + Math.random(4));
+    setLoading(true);
+    await uploadBytes(fileRef, file);
+    const photoURL = await getDownloadURL(fileRef);
+    await updateProfile(currentUser, {
+        photoURL
+    });
+    setLoading(false);
+    alert('Image uploaded');
 };
 
 export const UseAuth = () => {

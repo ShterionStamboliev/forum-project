@@ -1,16 +1,17 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { faUser } from '@fortawesome/fontawesome-free-regular';
 import { UseAuth } from '../../contexts/AuthContext';
 import { doc, writeBatch, arrayUnion } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { useParams } from 'react-router-dom';
 import CommentsLoader from '../CommentsLoader/CommentsLoader';
+import { Avatar } from '@mui/material';
 
 const LoggedInUserView = ({ thread }) => {
     const [commentText, setCommentText] = useState('');
     const { user } = UseAuth();
     const { id } = useParams();
+    
+    const userImageProfile = user?.photoURL;
 
     const currentUserEmail = user.email;
 
@@ -46,7 +47,10 @@ const LoggedInUserView = ({ thread }) => {
                         </div>
 
                         <div className="user-thread-icon center">
-                            <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
+                        <Avatar
+                                src={userImageProfile}
+                                sx={{ width: 56, height: 56 }}
+                            />
                         </div>
 
                         <div className="thread-description">
@@ -56,9 +60,18 @@ const LoggedInUserView = ({ thread }) => {
 
                     <div className="grid-wrapper-comment">
                         <div className="user-comments-img">
-                            <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
+                        <Avatar
+                                src={userImageProfile}
+                                sx={{ width: 56, height: 56 }}
+                            />
                         </div>
-                        <textarea value={commentText} onChange={handleChange} name="textarea" id="textarea" className="user-comments-area" placeholder='Leave a comment...'></textarea>
+                        <textarea 
+                        value={commentText} 
+                        onChange={handleChange} 
+                        name="textarea" 
+                        id="textarea" 
+                        className="user-comments-area" 
+                        placeholder='Leave a comment...'></textarea>
                         <input className='comment-button' type="submit" value="Submit" onClick={handleSubmit}></input>
                     </div>
 

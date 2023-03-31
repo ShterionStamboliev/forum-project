@@ -1,11 +1,14 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/fontawesome-free-regular';
 import CommentsLoader from '../CommentsLoader/CommentsLoader';
 import { faPenSquare } from '@fortawesome/fontawesome-free-solid';
 import { Link, useParams } from 'react-router-dom';
+import { Avatar } from '@mui/material';
+import { getAuth } from 'firebase/auth';
 
 const OwnerView = ({ thread }) => {
+    const auth = getAuth();
+    const userImageProfile = auth.currentUser?.photoURL;
 
     const { id } = useParams();
 
@@ -19,7 +22,10 @@ const OwnerView = ({ thread }) => {
                         </div>
 
                         <div className="user-thread-icon center">
-                            <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
+                            <Avatar
+                                src={userImageProfile}
+                                sx={{ width: 56, height: 56 }}
+                            />
                         </div>
 
                         <div className="thread-description">

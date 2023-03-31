@@ -9,6 +9,7 @@ import LoggedInUserView from '../CommentsViews/LoggedInUserView';
 import './ThreadDetails.css'
 
 const ThreadDetails = () => {
+
     const { user } = UseAuth();
     const { id } = useParams();
     const [thread, setThread] = useState({});

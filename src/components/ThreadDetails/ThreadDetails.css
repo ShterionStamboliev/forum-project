@@ -23,6 +23,7 @@ body {
   grid-template-rows: 2fr 4fr 2fr;
   padding: 12px;
   max-width: 1200px;
+  word-wrap: break-word;
 }
 
 .grid-wrapper-comment {

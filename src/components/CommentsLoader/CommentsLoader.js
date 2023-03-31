@@ -1,14 +1,18 @@
-import { faUser } from '@fortawesome/fontawesome-free-regular';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { collection, getDocs, query } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import './comments.css'
+import { Avatar } from '@mui/material';
 import { db } from '../../config/firebase';
+import { getAuth } from 'firebase/auth';
+import './comments.css'
 
 const CommentsLoader = () => {
     const { id } = useParams();
     const [usersComments, setUsersComments] = useState([]);
+
+    const auth = getAuth();
+    const userImageProfile = auth.currentUser?.photoURL;
+
 
     const col = query(collection(db, `threads/${id}/comments`));
 
@@ -42,7 +46,10 @@ const CommentsLoader = () => {
                 return (
                     <div className="grid-comments" key={x.id}>
                         <div className="user-comment-icon">
-                            <FontAwesomeIcon style={{ color: 'grey' }} icon={faUser}></FontAwesomeIcon>
+                            <Avatar
+                                src={userImageProfile}
+                                sx={{ width: 56, height: 56 }}
+                            />
                         </div>
 
                         <div className="user-comment-name">

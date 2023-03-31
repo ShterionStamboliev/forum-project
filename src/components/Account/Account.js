@@ -1,55 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar } from '@mui/material';
-import { db, storage } from '../../config/firebase';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { updateProfile, getAuth } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { UseAuth, uploadImage } from '../../contexts/AuthContext';
 import './Account.css';
 
 const Account = () => {
-
+  
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const auth = getAuth();
-  const currentUser = auth.currentUser;
+  const { user } = UseAuth();
 
 
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
-    }
+    };
   };
 
   const handleSubmit = () => {
-    const imageRef = ref(storage, `${currentUser.email}/images/${image.name + Math.random()}`);
-    setLoading(true);
-    uploadBytes(imageRef, image)
-      .then(() => {
-        getDownloadURL(imageRef)
-          .then((url) => {
-            setImageUrl(url);
-            const userRef = doc(db, 'users', currentUser.uid);
-            setDoc(userRef, {
-              photoURL: url
-            }, { merge: true });
-            setLoading(false);
-          }).catch((error) => {
-            console.log(error.message, 'Error getting image URL.');
-          })
-      }).catch((error) => {
-        console.log(error.message);
-      })
+    uploadImage(image, user, setLoading);
   };
 
   useEffect(() => {
-    const abortController = new AbortController();
-    if (currentUser) {
-      setImageUrl(currentUser.photoURL)
+    if (user?.photoURL) {
+      setImageUrl(user.photoURL)
     };
-    return () => abortController.abort();
-  }, [currentUser]);
+  }, [user]);
 
   return (
     <div className='account-wrapper'>
