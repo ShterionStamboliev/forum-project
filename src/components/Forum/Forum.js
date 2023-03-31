@@ -62,19 +62,3 @@ const Forum = () => {
 };
 
 export default Forum;
-
-
-
-
-            // const threadData = query(threadsCollectionRef);
-            // const unsubscribe = onSnapshot(threadData, (querySnapshot) => {
-            //     let threadsArray = [];
-            //     querySnapshot.forEach((doc) => {
-            //         threadsArray.push({
-            //             id: doc.id,
-            //             ...doc.data()
-            //         });
-            //     });
-            //     setThreads(threadsArray);
-            // });
-            // return () => unsubscribe();
