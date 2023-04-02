@@ -57,7 +57,7 @@ const Account = () => {
         <div className="account-image">
           <Avatar className="user-avatar"
             src={imageUrl}
-            sx={{ width: 120, height: 120 }}
+            sx={{ width: 90, height: 90 }}
           />
           {/* <button disabled={loading || !image} onClick={handleSubmit}>Submit</button> */}
           {/* <button disabled={image} onClick={handleDelete}>Remove avatar</button> */}
@@ -71,7 +71,7 @@ const Account = () => {
         </Stack>
 
         <Stack className='submit-img' direction="row" spacing={2}>
-          <Button onChange={handleSubmit} variant="contained" endIcon={<CloudUploadIcon />}>
+          <Button onClick={handleSubmit} variant="contained" endIcon={<CloudUploadIcon />}>
             Upload
           </Button>
         </Stack>

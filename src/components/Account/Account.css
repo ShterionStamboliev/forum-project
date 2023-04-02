@@ -24,21 +24,19 @@
 
 .account-image {
   grid-area: avatar;
-  margin-left: 3px;
+  margin-left: 12px;
 }
 
 .upload-img {
   grid-area: avatar;
   position: relative;
-  top: 25px;
-  left: 47px;
+  left: 42px;
+  top: 18px;
 }
 
 .submit-img {
   grid-area: browse;
   position: relative;
-  max-width: 100px;
-  margin-left: 25px;
-  margin-bottom: 35px;
-  right: 13px;
+  padding: 14px 0px;
+  bottom: 10px;
 }
