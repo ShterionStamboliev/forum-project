@@ -6,9 +6,10 @@ import {
     signOut,
     updateProfile
 } from 'firebase/auth'
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
 import { storage } from "../config/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
 
 const UserContext = createContext();
 
@@ -43,16 +44,20 @@ export const AuthContextProvider = ({ children }) => {
 };
 
 export async function uploadImage(file, currentUser, setLoading) {
-    const fileRef = ref(storage, `${currentUser.uid}/images/` + Math.random(4));
+    const fileRef = ref(storage, `${currentUser.uid}/images/`);
     setLoading(true);
     await uploadBytes(fileRef, file);
     const photoURL = await getDownloadURL(fileRef);
     await updateProfile(currentUser, {
         photoURL
     });
+    await setDoc(doc(db, 'users', currentUser.uid), {
+        photo: photoURL
+    }, { merge: true })
     setLoading(false);
     alert('Image uploaded');
 };
+
 
 export const UseAuth = () => {
     return useContext(UserContext);

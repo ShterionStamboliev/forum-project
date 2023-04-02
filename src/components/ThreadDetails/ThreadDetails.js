@@ -43,6 +43,7 @@ const ThreadDetails = () => {
             const unsubscribe = onSnapshot(threadRef, (doc) => {
                 let arr = [];
                 arr.push({ ...doc.data(), id: doc.id });
+                console.log(arr);
                 setThread(arr);
             });
             return () => unsubscribe();

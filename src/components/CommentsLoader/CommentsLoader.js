@@ -3,16 +3,12 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { db } from '../../config/firebase';
-import { getAuth } from 'firebase/auth';
 import './comments.css'
 
 const CommentsLoader = () => {
-    const { id } = useParams();
     const [usersComments, setUsersComments] = useState([]);
 
-    const auth = getAuth();
-    const userImageProfile = auth.currentUser?.photoURL;
-
+    const { id } = useParams();
 
     const col = query(collection(db, `threads/${id}/comments`));
 
@@ -37,20 +33,18 @@ const CommentsLoader = () => {
         getSnap();
 
         return () => a.abort();
-    }, []);
-
+    }, []); // PUT USERSCOMMENTS DEPENDANCY HERE FOR AUTO COMMENTS RE-LOAD
 
     return (
         <>
             {usersComments.map((x) => {
+                console.log(x.photo)
                 return (
                     <div className="grid-comments" key={x.id}>
-                        <div className="user-comment-icon">
-                            <Avatar
-                                src={userImageProfile}
+                            <Avatar className="user-comment-icon"
+                                src={x.photo}
                                 sx={{ width: 56, height: 56 }}
                             />
-                        </div>
 
                         <div className="user-comment-name">
                             {x.author}

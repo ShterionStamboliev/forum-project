@@ -1,24 +1,44 @@
-.account-container {
-    padding: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+.account-wrapper {
+  display: grid;
+  margin: 10px auto 0 auto;
+  max-width: 70%;
+  padding-bottom: 150px;
 }
 
-.account-title {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    font-size: 1.5rem;
-    line-height: 2rem;
+.account-info-wrapper {
+  display: grid;
+  grid-template-areas:
+    "avatar . "
+    "browse . "
+    "a a "
+    "b b "
+    "c c  "
+    "d d "
+    "e e ";
+  grid-template-columns: 1fr 4fr;
+  grid-auto-rows: 1.25fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr;
+  margin: 10px auto 0 auto;
+  max-width: 90%;
+  padding-bottom: 150px;
 }
 
-.btn-sign-out {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border-width: 1px;
+.account-image {
+  grid-area: avatar;
+  margin-left: 3px;
+}
+
+.upload-img {
+  grid-area: avatar;
+  position: relative;
+  top: 25px;
+  left: 47px;
+}
+
+.submit-img {
+  grid-area: browse;
+  position: relative;
+  max-width: 100px;
+  margin-left: 25px;
+  margin-bottom: 35px;
+  right: 13px;
 }

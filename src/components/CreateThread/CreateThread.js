@@ -41,6 +41,7 @@ const CreateThread = () => {
                 author: {
                     owner: auth?.currentUser?.uid,
                     name: auth?.currentUser?.email,
+                    photo: auth?.currentUser.photoURL
                 },
                 post: {
                     postTitle: value.title,

@@ -14,13 +14,13 @@ body {
 .grid-wrapper {
   display: grid;
   grid-template-areas: 
-  ". title . ."
+  "user-name title . ."
   "user-img desc desc ."
   "edit desc desc .";
   width: 100%;
   height: 200px;
-  grid-template-columns: 0.75fr 3.25fr 5fr;
-  grid-template-rows: 2fr 4fr 2fr;
+  grid-template-columns: 0.80fr 6fr 12fr;
+  grid-template-rows: 1fr 4fr 2fr;
   padding: 12px;
   max-width: 1200px;
   word-wrap: break-word;
@@ -28,8 +28,9 @@ body {
 
 .grid-wrapper-comment {
   display: grid;
-  grid-template-areas: 
-  "user-comment-img txt txt ."
+  grid-template-areas:
+  "user-comment-name . . ."
+  "user-comment-img txt txt txt"
   ". . . submit";
   width: 100%;
   height: 200px;
@@ -46,14 +47,20 @@ body {
   "usr-img comment comment .";
   width: 100%;
   height: 200px;
-  grid-template-columns: 0.75fr 3.25fr 5fr;
-  grid-template-rows: 1.55fr 4fr;
+  grid-template-columns: 0.80fr 6fr 12fr;
+  grid-template-rows: 1fr 1fr 1fr;
   padding: 12px;
   max-width: 1200px;
   word-wrap: break-word;
-  
 }
 
+.user-thread-name {
+    grid-area: user-name;
+    border-radius: 5px;
+    color: #ecf0f1;
+    font-size: 16px;
+    margin-top: 30px;
+}
 
 .current-thread-title {
   grid-area: title;
@@ -69,12 +76,9 @@ body {
   grid-area: user-img;
   text-align: center;
   background-color: #24252a;
-  border-radius: 5px;
-  padding: 10px;
   margin-top: 15px;
   max-height: 5rem;
-  max-width: 100px;
-  min-width: 100px;
+  margin-left: 17px;
 }
 
 .thread-description {
@@ -89,16 +93,16 @@ body {
 }
 
 .thread-edit-button {
-  grid-area: edit;
-  text-align: center;
+  grid-area: user-img;
   color: #ecf0f1;
-  padding: 10px;
-  background-color: rgba(0, 136, 169, 1);
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease 0s;
-  margin-top: 15px;
+  position: relative;
+  top: 79px;
+  left: 56px;
+  max-width: 18px;
+  max-height: 18px;
 }
 
 .thread-edit-button:hover {
@@ -107,14 +111,10 @@ body {
 
 .user-comment-icon {
   grid-area: usr-img;
-  text-align: center;
   background-color: #24252a;
-  border-radius: 5px;
-  padding: 10px;
   margin-top: 15px;
   max-height: 5rem;
-  max-width: 100px;
-  min-width: 100px;
+  margin-left: 20px;
 }
 
 .user-comment-text {
@@ -126,7 +126,7 @@ body {
   border-radius: 5px;
   padding: 10px;
   margin-top: 15px;
-  margin-left: 15px;
+  margin-left: 8px;
   color: #ecf0f1;
 }
 
@@ -135,33 +135,38 @@ body {
 	border-radius: 5px;
 	color: #ecf0f1;
 	font-size: 16px;
-  margin-top: 30px;
+  margin-top: 80px;
 }
 
 .user-comments-area {
   grid-area: txt;
   resize: none;
   border: none;
-  width: 1060px;
   font-size: 18px;
   background-color: #24252a;
   border-radius: 5px;
   padding: 10px;
   margin-top: 15px;
-  margin-left: 15px;
+  margin-left: 8px;
   color: #ecf0f1;
+}
+
+.user-comments-name {
+  grid-area: user-comment-name;
+	border-radius: 5px;
+	color: #ecf0f1;
+	font-size: 16px;
+  margin-top: 30px;
+  
 }
 
 .user-comments-img {
   grid-area: user-comment-img;
   text-align: center;
   background-color: #24252a;
-  border-radius: 5px;
-  padding: 10px;
   margin-top: 15px;
   max-height: 5rem;
-  max-width: 100px;
-  min-width: 100px;
+  margin-left: 20px;
 }
 
 .user-comments-area:focus {

@@ -10,7 +10,7 @@ const LoggedInUserView = ({ thread }) => {
     const [commentText, setCommentText] = useState('');
     const { user } = UseAuth();
     const { id } = useParams();
-    
+
     const userImageProfile = user?.photoURL;
 
     const currentUserEmail = user.email;
@@ -25,7 +25,8 @@ const LoggedInUserView = ({ thread }) => {
             comments: arrayUnion(
                 {
                     author: currentUserEmail,
-                    comment: commentText
+                    comment: commentText,
+                    photo: userImageProfile
                 }
             )
         }, { merge: true })
@@ -42,36 +43,46 @@ const LoggedInUserView = ({ thread }) => {
             {Object.values(thread).map((x) => {
                 return <React.Fragment key={x.id}>
                     <div className="grid-wrapper">
+
+                        <div className="user-thread-name">
+                            {x.author.name}
+                        </div>
+
                         <div className="current-thread-title">
                             {x.post.postTitle}
                         </div>
 
-                        <div className="user-thread-icon center">
-                        <Avatar
-                                src={userImageProfile}
+                            <Avatar className="user-thread-icon"
+                                src={x.author.photo}
                                 sx={{ width: 56, height: 56 }}
                             />
-                        </div>
 
                         <div className="thread-description">
                             {x.post.postDescription}
                         </div>
+
+                        {/* TODO: ADD LIKES/DISLIKES HERE AND PUT THEM IN EDIT CSS BOX*/}
+
                     </div>
 
                     <div className="grid-wrapper-comment">
-                        <div className="user-comments-img">
-                        <Avatar
+
+                        <div className="user-comments-name">
+                            {currentUserEmail}
+                        </div>
+
+                            <Avatar className="user-comments-img"
                                 src={userImageProfile}
                                 sx={{ width: 56, height: 56 }}
                             />
-                        </div>
-                        <textarea 
-                        value={commentText} 
-                        onChange={handleChange} 
-                        name="textarea" 
-                        id="textarea" 
-                        className="user-comments-area" 
-                        placeholder='Leave a comment...'></textarea>
+
+                        <textarea
+                            value={commentText}
+                            onChange={handleChange}
+                            name="textarea"
+                            id="textarea"
+                            className="user-comments-area"
+                            placeholder='Leave a comment...'></textarea>
                         <input className='comment-button' type="submit" value="Submit" onClick={handleSubmit}></input>
                     </div>
 

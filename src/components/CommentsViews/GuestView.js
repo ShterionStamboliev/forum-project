@@ -1,11 +1,8 @@
 import React from 'react';
 import CommentsLoader from '../CommentsLoader/CommentsLoader';
 import { Avatar } from '@mui/material';
-import { getAuth } from 'firebase/auth';
 
 const GuestView = ({ thread }) => {
-    const auth = getAuth();
-    const userImageProfile = auth.currentUser?.photoURL;
 
     return (
         <>
@@ -16,12 +13,10 @@ const GuestView = ({ thread }) => {
                             {x.post.postTitle}
                         </div>
 
-                        <div className="user-thread-icon center">
-                        <Avatar
-                                src={userImageProfile}
+                            <Avatar className="user-thread-icon"
+                                src={x.author.photo}
                                 sx={{ width: 56, height: 56 }}
                             />
-                        </div>
 
                         <div className="thread-description">
                             {x.post.postDescription}
