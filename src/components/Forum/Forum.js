@@ -9,11 +9,12 @@ const Forum = () => {
     const [threads, setThreads] = useState([]);
     const threadsCollectionRef = collection(db, "threads");
 
+    
     useEffect(() => {
         try {
             getDocs(threadsCollectionRef)
-            .then((res) => {
-                const threadsArr = [];
+                .then((res) => {
+                    const threadsArr = [];
                     res.forEach((doc) => {
                         threadsArr.push({
                             id: doc.id,
@@ -53,8 +54,8 @@ const Forum = () => {
                         </div>
                     }) :
                     <div className="no-posts">
-                        There are no threads yet. Be the first one to make a <Link to='/create-thread' 
-                        style={{ textDecoration: 'underline', fontSize: '25px' }}><i>post!</i></Link>
+                        There are no threads yet. Be the first one to make a <Link to='/create-thread'
+                            style={{ textDecoration: 'underline', fontSize: '25px' }}><i>post!</i></Link>
                     </div>
                 }
             </div>

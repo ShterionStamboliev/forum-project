@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete'
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import EditIcon from '@mui/icons-material/Edit';
+import Swal from 'sweetalert2';
 
 const Account = () => {
 
@@ -52,10 +52,39 @@ const Account = () => {
             console.log(res);
             deleteObject(fileRef).then(async () => {
                 const userRef = doc(db, 'users', user.uid);
-                await updateDoc(userRef, {
-                    photo: deleteField()
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+                swalWithBootstrapButtons.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Remove avatar',
+                    cancelButtonText: 'Cancel',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        updateDoc(userRef, {
+                            photo: deleteField()
+                        });
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            'Avatar removed',
+                            'success'
+                        )
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        swalWithBootstrapButtons.fire(
+                            'Cancelled',
+                            'error'
+                        )
+                    }
                 });
-                alert('Image deleted successfully')
+
             }).catch((error) => {
                 console.log(error.message);
             });
@@ -73,7 +102,6 @@ const Account = () => {
         <div className='account-wrapper'>
             <div className="account-info-wrapper">
                 <div className="account-image">
-
                     <Avatar className="user-avatar"
                         src={imageUrl}
                         sx={{ width: 90, height: 90 }}
@@ -87,27 +115,23 @@ const Account = () => {
                     </IconButton>
                 </Stack>
 
-                {image ?
-                    <Stack className='submit-img' direction="row" spacing={2}>
-                        <Button onClick={handleSubmit} variant="contained" endIcon={<CloudUploadIcon />}>
-                            Upload
-                        </Button>
-                    </Stack> :
-                    <Stack className='remove-img' direction="row" spacing={2}>
+                <Stack className='submit-img' direction="row" spacing={2}>
+                    <Button onClick={handleSubmit} variant="contained" endIcon={<CloudUploadIcon />}>
+                        Upload
+                    </Button>
+                </Stack>
+
+                {/* <Stack className='remove-img' direction="row" spacing={2}>
                         <Button onClick={handleDelete} variant="outlined" sx={{ backgroundColor: '#1976d2', color: 'white' }} startIcon={<DeleteIcon />}>
                             Remove
                         </Button>
-                    </Stack>}
+                    </Stack> */}
 
                 {Object.values(userData).map((user) => {
                     return <React.Fragment key={user.id}>
 
                         <div className="currentuser-username">
                             {user.username}
-                        </div>
-
-                        <div className="account-username-edit">
-                            <EditIcon sx={{ color: '#1976d2' }} />
                         </div>
 
                         <div className="account-threads">
@@ -119,28 +143,19 @@ const Account = () => {
                         </div>
 
                         <div className="email-icon">
-                            E-mail:
+                            E-mail
                         </div>
 
                         <div className="account-email">
-                            <input className='account-email-input' type="text" name="email" id="email" placeholder={user.email} disabled={true} />
-                        </div>
-
-                        <div className="account-email-edit">
-                            <EditIcon sx={{ color: '#1976d2' }} />
+                            {user.email}
                         </div>
 
                         <div className="account-user-icon">
-                            Full name:
-                            {/* <PersonOutlineOutlinedIcon sx={{ color: '#1976d2', fontSize: '27px' }} /> */}
+                            Name
                         </div>
 
                         <div className="account-names">
                             {user.firstName} {user.lastName}
-                        </div>
-
-                        <div className="account-names-edit">
-                            <EditIcon sx={{ color: '#1976d2' }} />
                         </div>
 
                     </React.Fragment>

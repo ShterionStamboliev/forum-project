@@ -12,15 +12,13 @@
     "browse info "
     "email e-address "
     "user names "
-    "c c  "
-    "d d "
-    "e e ";
+    "c c  ";
   grid-template-columns: 0.5fr 5fr;
-  grid-auto-rows: 1.25fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr;
+  grid-auto-rows: 1.25fr 0.75fr 0.75fr 0.75fr 0.75fr;
   margin: 10px auto 0 auto;
   width: 800px;
-  padding-bottom: 150px;
-  border: 1px solid white;
+  border: 1px solid #737373;
+  border-radius: 4px;
 }
 
 .account-image {
@@ -57,82 +55,86 @@
 
 .currentuser-username {
   grid-area: username;
-  padding: 8px;
-  color: white;
+  margin-bottom: 80px;
+  color: #ecf0f1;
   font-size: 25px;
 }
 
 .account-threads {
   grid-area: c;
   padding: 8px;
-  color: white;
+  color: #ecf0f1;
   font-size: 15px;
 }
 
 .email-icon {
   grid-area: email;
-  color: white;
+  color: #ecf0f1;
   max-width: 87px;
   max-height: 48px;
   margin-left: 65px;
   margin-top: 25px;
+  font-weight: bold;
 }
 
 .account-email {
   grid-area: e-address;
   margin-top: 25px;
+  margin-right: 15px;
   margin-bottom: 22px;
-  border-bottom: 1px solid grey;
+  color: #ecf0f1;
+
 }
 
 .account-email-edit {
   grid-area: e-address;
   position: relative;
-  left: 650px;
+  left: 638px;
   top: 20px;
 }
 
 .account-username-edit {
   grid-area: username;
   position: relative;
-  left: 650px;
+  left: 638px;
 }
 
 .account-user-icon {
   grid-area: user;
   position: relative;
   top: 25.5px;
-  left: 35px;
-  color: white;
+  left: 65px;
+  color: #ecf0f1;
   max-width: 87px;
   max-height: 48px;
+  font-weight: bold;
 }
 
 .account-email-input {
   background-color: #333333;
   border: none;
-  color: white;
+  color: #ecf0f1;
 }
 
 .account-names {
   grid-area: names;
-  color: white;
+  color: #ecf0f1;
   margin-top: 25px;
+  margin-right: 15px;
   margin-bottom: 22px;
-  border-bottom: 1px solid grey;
 }
 
 .user-info {
   grid-area: info;
-  color: white;
-  position: relative;
+  color: #ecf0f1;
+  margin-right: 15px;
   margin-top: 45px;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #ecf0f1;
 }
 
 .account-names-edit {
   grid-area: names;
   position: relative;
-  left: 650px;
+  left: 638px;
   top: 20px;
 }
