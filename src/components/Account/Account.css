@@ -9,43 +9,50 @@
   display: grid;
   grid-template-areas:
     "avatar username "
-    "browse threads "
+    "browse info "
     "email e-address "
     "user names "
     "c c  "
     "d d "
     "e e ";
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 0.5fr 5fr;
   grid-auto-rows: 1.25fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr;
   margin: 10px auto 0 auto;
-  max-width: 90%;
+  width: 800px;
   padding-bottom: 150px;
+  border: 1px solid white;
 }
 
 .account-image {
   grid-area: avatar;
-  margin-left: 12px;
+  margin: 15px;
+}
+
+.user-avatar {
+  margin-left: 7px;
 }
 
 .upload-img {
   grid-area: avatar;
   position: relative;
-  left: 42px;
-  top: 18px;
+  left: 47px;
+  top: 23px;
 }
 
 .submit-img {
   grid-area: browse;
   position: relative;
   padding: 14px 0px;
-  bottom: 10px;
+  bottom: 12px;
+  width: 100px;
 }
 
 .remove-img {
   grid-area: browse;
+  padding-bottom: 35px;
+  width: 125px;
   position: relative;
-  padding: 14px 0px;
-  bottom: 10px;
+  left: 5px;
 }
 
 .currentuser-username {
@@ -64,30 +71,41 @@
 
 .email-icon {
   grid-area: email;
-  position: relative;
-  top: 13.5px;
-  left: 50px;
+  color: white;
+  max-width: 87px;
+  max-height: 48px;
+  margin-left: 65px;
+  margin-top: 25px;
 }
 
 .account-email {
   grid-area: e-address;
-  position: relative;
-  left: 8px;
-  top: 14px;
+  margin-top: 25px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid grey;
 }
 
 .account-email-edit {
   grid-area: e-address;
   position: relative;
-  left: 450px;
-  top: 15px;
+  left: 650px;
+  top: 20px;
+}
+
+.account-username-edit {
+  grid-area: username;
+  position: relative;
+  left: 650px;
 }
 
 .account-user-icon {
   grid-area: user;
   position: relative;
-  top: 13.5px;
-  left: 48px;
+  top: 25.5px;
+  left: 35px;
+  color: white;
+  max-width: 87px;
+  max-height: 48px;
 }
 
 .account-email-input {
@@ -98,22 +116,23 @@
 
 .account-names {
   grid-area: names;
-  position: relative;
-  left: 8px;
-  top: 14px;
   color: white;
+  margin-top: 25px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid grey;
 }
 
 .user-info {
-  grid-area: threads;
+  grid-area: info;
   color: white;
   position: relative;
-  top: 43px;
-  left: 8px;
+  margin-top: 45px;
+  border-bottom: 1px solid white;
 }
 
-.user-info-hr {
-  grid-area: threads;
+.account-names-edit {
+  grid-area: names;
   position: relative;
-  top: 56px;
+  left: 650px;
+  top: 20px;
 }

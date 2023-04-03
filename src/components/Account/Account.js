@@ -11,9 +11,7 @@ import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete'
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import EditIcon from '@mui/icons-material/Edit';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 const Account = () => {
 
@@ -75,6 +73,7 @@ const Account = () => {
         <div className='account-wrapper'>
             <div className="account-info-wrapper">
                 <div className="account-image">
+
                     <Avatar className="user-avatar"
                         src={imageUrl}
                         sx={{ width: 90, height: 90 }}
@@ -107,6 +106,10 @@ const Account = () => {
                             {user.username}
                         </div>
 
+                        <div className="account-username-edit">
+                            <EditIcon sx={{ color: '#1976d2' }} />
+                        </div>
+
                         <div className="account-threads">
                             Active threads: {user.posts.length}
                         </div>
@@ -114,12 +117,9 @@ const Account = () => {
                         <div className="user-info">
                             Profile information
                         </div>
-                        <div className='user-info-hr'>
-                            <hr />
-                        </div>
 
                         <div className="email-icon">
-                            <EmailOutlinedIcon sx={{ color: '#1976d2' }} />
+                            E-mail:
                         </div>
 
                         <div className="account-email">
@@ -131,11 +131,16 @@ const Account = () => {
                         </div>
 
                         <div className="account-user-icon">
-                            <PersonOutlineOutlinedIcon sx={{ color: '#1976d2', fontSize: '27px' }} />
+                            Full name:
+                            {/* <PersonOutlineOutlinedIcon sx={{ color: '#1976d2', fontSize: '27px' }} /> */}
                         </div>
 
                         <div className="account-names">
                             {user.firstName} {user.lastName}
+                        </div>
+
+                        <div className="account-names-edit">
+                            <EditIcon sx={{ color: '#1976d2' }} />
                         </div>
 
                     </React.Fragment>
