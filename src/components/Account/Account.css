@@ -8,10 +8,10 @@
 .account-info-wrapper {
   display: grid;
   grid-template-areas:
-    "avatar . "
-    "browse . "
-    "a a "
-    "b b "
+    "avatar username "
+    "browse threads "
+    "email e-address "
+    "user names "
     "c c  "
     "d d "
     "e e ";
@@ -46,4 +46,74 @@
   position: relative;
   padding: 14px 0px;
   bottom: 10px;
+}
+
+.currentuser-username {
+  grid-area: username;
+  padding: 8px;
+  color: white;
+  font-size: 25px;
+}
+
+.account-threads {
+  grid-area: c;
+  padding: 8px;
+  color: white;
+  font-size: 15px;
+}
+
+.email-icon {
+  grid-area: email;
+  position: relative;
+  top: 13.5px;
+  left: 50px;
+}
+
+.account-email {
+  grid-area: e-address;
+  position: relative;
+  left: 8px;
+  top: 14px;
+}
+
+.account-email-edit {
+  grid-area: e-address;
+  position: relative;
+  left: 450px;
+  top: 15px;
+}
+
+.account-user-icon {
+  grid-area: user;
+  position: relative;
+  top: 13.5px;
+  left: 48px;
+}
+
+.account-email-input {
+  background-color: #333333;
+  border: none;
+  color: white;
+}
+
+.account-names {
+  grid-area: names;
+  position: relative;
+  left: 8px;
+  top: 14px;
+  color: white;
+}
+
+.user-info {
+  grid-area: threads;
+  color: white;
+  position: relative;
+  top: 43px;
+  left: 8px;
+}
+
+.user-info-hr {
+  grid-area: threads;
+  position: relative;
+  top: 56px;
 }

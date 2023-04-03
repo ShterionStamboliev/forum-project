@@ -11,6 +11,9 @@ import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete'
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import EditIcon from '@mui/icons-material/Edit';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 const Account = () => {
 
@@ -99,13 +102,42 @@ const Account = () => {
 
                 {Object.values(userData).map((user) => {
                     return <React.Fragment key={user.id}>
+
                         <div className="currentuser-username">
                             {user.username}
                         </div>
 
-                        <div className="account-threads"  style={{color: 'white'}}>
+                        <div className="account-threads">
                             Active threads: {user.posts.length}
                         </div>
+
+                        <div className="user-info">
+                            Profile information
+                        </div>
+                        <div className='user-info-hr'>
+                            <hr />
+                        </div>
+
+                        <div className="email-icon">
+                            <EmailOutlinedIcon sx={{ color: '#1976d2' }} />
+                        </div>
+
+                        <div className="account-email">
+                            <input className='account-email-input' type="text" name="email" id="email" placeholder={user.email} disabled={true} />
+                        </div>
+
+                        <div className="account-email-edit">
+                            <EditIcon sx={{ color: '#1976d2' }} />
+                        </div>
+
+                        <div className="account-user-icon">
+                            <PersonOutlineOutlinedIcon sx={{ color: '#1976d2', fontSize: '27px' }} />
+                        </div>
+
+                        <div className="account-names">
+                            {user.firstName} {user.lastName}
+                        </div>
+
                     </React.Fragment>
                 })}
 
