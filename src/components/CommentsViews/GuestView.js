@@ -15,7 +15,7 @@ const GuestView = ({ thread }) => {
 
                             <Avatar className="user-thread-icon"
                                 src={x.author.photo}
-                                sx={{ width: 56, height: 56 }}
+                                sx={{ width: 55, height: 55 }}
                             />
 
                         <div className="thread-description">

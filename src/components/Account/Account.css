@@ -40,3 +40,10 @@
   padding: 14px 0px;
   bottom: 10px;
 }
+
+.remove-img {
+  grid-area: browse;
+  position: relative;
+  padding: 14px 0px;
+  bottom: 10px;
+}

@@ -43,9 +43,8 @@ export const AuthContextProvider = ({ children }) => {
     );
 };
 
-export async function uploadImage(file, currentUser, setLoading) {
+export async function uploadImage(file, currentUser) {
     const fileRef = ref(storage, `${currentUser.uid}/images/`);
-    setLoading(true);
     await uploadBytes(fileRef, file);
     const photoURL = await getDownloadURL(fileRef);
     await updateProfile(currentUser, {
@@ -54,7 +53,6 @@ export async function uploadImage(file, currentUser, setLoading) {
     await setDoc(doc(db, 'users', currentUser.uid), {
         photo: photoURL
     }, { merge: true })
-    setLoading(false);
     alert('Image uploaded');
 };
 
