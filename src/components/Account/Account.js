@@ -26,7 +26,7 @@ const Account = () => {
         if (userDataRef.exists()) {
             const data = [{ ...userDataRef.data(), id: userDataRef.id }]
             setUserData(data);
-        }
+        };
     };
 
     useEffect(() => {
@@ -37,13 +37,25 @@ const Account = () => {
 
 
     const handleImageChange = (e) => {
+        e.preventDefault();
         if (e.target.files[0]) {
             setImage(e.target.files[0]);
         };
     };
 
-    const handleSubmit = async () => {
-        uploadImage(image, user);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        uploadImage(image, user).then(() => {
+            Swal.fire({
+                title: 'Your avatar is set!',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+        });
     };
 
     useEffect(() => {
@@ -86,8 +98,8 @@ const Account = () => {
                         swalWithBootstrapButtons.fire(
                             'Cancelled',
                             'error'
-                        )
-                    }
+                        );
+                    };
                 });
 
             }).catch((error) => {
@@ -114,15 +126,36 @@ const Account = () => {
                 </Stack>
 
                 <Stack className='submit-img' direction="row" spacing={2}>
-                    <Button onClick={handleSubmit} variant="contained" endIcon={<CloudUploadIcon />}>
+                    <Button onClick={handleSubmit}
+                        sx={{
+                            fontSize: '12px',
+                            borderRadius: '50px',
+                            fontFamily: 'Montserrat, sans-serif'
+                        }}
+                        variant="contained" endIcon={<CloudUploadIcon />}>
                         Upload
                     </Button>
                 </Stack>
 
-                <Stack className='remove-img' direction="row" spacing={2}>
+                {/* <Stack className='remove-img' direction="row" spacing={2}>
                     <Button onClick={handleDelete} variant="outlined" sx={{ backgroundColor: '#1976d2', color: 'white' }} startIcon={<DeleteIcon />}>
                         Remove
                     </Button>
+                </Stack> */}
+                    
+                    
+                <Stack className='edit-account-profile' direction="row" spacing={2}>
+                    <Button href={`/account/${user.uid}/edit`} variant="contained"
+                        sx={{
+                            backgroundColor: '#1976d2',
+                            color: 'white',
+                            fontSize: '12px',
+                            borderRadius: '50px',
+                            fontFamily: 'Montserrat, sans-serif'
+                        }}>
+                        Edit profile
+                    </Button>
+                    
                 </Stack>
 
                 {Object.values(userData).map((user) => {
@@ -133,7 +166,7 @@ const Account = () => {
                         </div>
 
                         <div className="account-threads">
-                            Active threads: {user.posts.length}
+                            Active threads {Object.keys(user.posts).length}
                         </div>
 
                         <div className="user-info">

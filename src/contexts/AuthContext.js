@@ -47,7 +47,7 @@ export async function uploadImage(file, currentUser) {
     const fileRef = ref(storage, `${currentUser.uid}/images/`);
     await uploadBytes(fileRef, file);
     const photoURL = await getDownloadURL(fileRef);
-    await updateProfile(currentUser, {
+    updateProfile(currentUser, {
         photoURL
     });
     await setDoc(doc(db, 'users', currentUser.uid), {

@@ -13,6 +13,7 @@ import RouteGuard from './components/RouteGuard/RouteGuard';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Logout from './components/Logout/Logout';
 import ThreadDetails from './components/ThreadDetails/ThreadDetails';
+import EditAccount from './components/EditAccount/EditAccount'
 
 function App() {
 
@@ -24,11 +25,12 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/forum' element={<Forum />} />
-                    <Route path='/forum/:id' element={<ThreadDetails /> } />  {/* PUT THREAD DETAILS HERE */}
+                    <Route path='/forum/:id' element={<ThreadDetails /> } />  
                     <Route path='/forum/:id/edit' element={<EditThread />} />
                     
                     <Route path='/create-thread' element={<RouteGuard> <CreateThread /> </RouteGuard>} />
                     <Route path='/account' element={<RouteGuard>  <Account /></RouteGuard>} />
+                    <Route path='/account/:id/edit' element={<RouteGuard>  <EditAccount /></RouteGuard>} />
                     <Route path='/register' element={<Register />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/logout' element={<Logout />} />
