@@ -53,7 +53,6 @@ export async function uploadImage(file, currentUser) {
     await setDoc(doc(db, 'users', currentUser.uid), {
         photo: photoURL
     }, { merge: true })
-    alert('Image uploaded');
 };
 
 

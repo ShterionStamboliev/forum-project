@@ -46,10 +46,15 @@ const Account = () => {
         uploadImage(image, user);
     };
 
+    useEffect(() => {
+        if (user?.photoURL) {
+            setImageUrl(user.photoURL);
+        };
+    }, [user]);
+
     const handleDelete = () => {
         const fileRef = ref(storage, `${user.uid}/images/`);
-        getMetadata(fileRef).then((res) => {
-            console.log(res);
+        getMetadata(fileRef).then(() => {
             deleteObject(fileRef).then(async () => {
                 const userRef = doc(db, 'users', user.uid);
                 const swalWithBootstrapButtons = Swal.mixin({
@@ -91,18 +96,11 @@ const Account = () => {
         });
     };
 
-    useEffect(() => {
-        if (user?.photoURL) {
-            setImageUrl(user.photoURL)
-        };
-    }, [user]);
-
-
     return (
         <div className='account-wrapper'>
             <div className="account-info-wrapper">
                 <div className="account-image">
-                    <Avatar className="user-avatar"
+                    <Avatar onChange={handleImageChange} className="user-avatar"
                         src={imageUrl}
                         sx={{ width: 90, height: 90 }}
                     />
@@ -121,11 +119,11 @@ const Account = () => {
                     </Button>
                 </Stack>
 
-                {/* <Stack className='remove-img' direction="row" spacing={2}>
-                        <Button onClick={handleDelete} variant="outlined" sx={{ backgroundColor: '#1976d2', color: 'white' }} startIcon={<DeleteIcon />}>
-                            Remove
-                        </Button>
-                    </Stack> */}
+                <Stack className='remove-img' direction="row" spacing={2}>
+                    <Button onClick={handleDelete} variant="outlined" sx={{ backgroundColor: '#1976d2', color: 'white' }} startIcon={<DeleteIcon />}>
+                        Remove
+                    </Button>
+                </Stack>
 
                 {Object.values(userData).map((user) => {
                     return <React.Fragment key={user.id}>
@@ -159,8 +157,7 @@ const Account = () => {
                         </div>
 
                     </React.Fragment>
-                })}
-
+                })};
 
             </div>
         </div>

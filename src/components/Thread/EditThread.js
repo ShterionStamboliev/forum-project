@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
 import { db } from '../../config/firebase';
-import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { doc, updateDoc, deleteDoc, deleteField } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { runEmptyFieldAlert } from '../../utils/alerts';
 import Swal from 'sweetalert2';
+import { UseAuth } from '../../contexts/AuthContext';
 import './Thread.css';
-
 
 const EditThread = () => {
     const { id } = useParams();
+    const { user } = UseAuth();
     const [value, setValue] = useState({
         title: '',
         comment: ''
     });
+
     const navigate = useNavigate();
+
     const threadRef = doc(db, 'threads', id);
 
+    const usrRef = doc(db, 'users', user.uid);
 
     const handleUpdate = async (e) => {
         e.preventDefault();
@@ -76,8 +80,10 @@ const EditThread = () => {
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
+                    updateDoc(usrRef, {
+                        [`posts.${id}`]: deleteField()
+                    });
                     deleteDoc(threadRef);
-                    // DELETE POST DOCUMENT FROM USERS COLLECTION
                     swalWithBootstrapButtons.fire(
                         'Deleted!',
                         'Your file has been deleted.',
@@ -90,7 +96,7 @@ const EditThread = () => {
                         'error'
                     )
                 }
-            });
+            })
         } catch (error) {
             console.log(error);
         }

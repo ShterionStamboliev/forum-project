@@ -84,7 +84,6 @@ const Register = () => {
                         email: value.email,
                         username: value.username,
                         createdOn: new Date().toLocaleDateString(),
-                        posts: []
                     });
                 });
             runSuccessfulRegistration();

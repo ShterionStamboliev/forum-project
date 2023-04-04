@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { db, auth } from '../../config/firebase';
-import { collection, addDoc, updateDoc, writeBatch, doc, arrayUnion } from "firebase/firestore";
+import { collection, addDoc, writeBatch, doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import {
     runSuccessfulPostCreation,
@@ -51,13 +51,14 @@ const CreateThread = () => {
                 },
             }).then(async (doc) => {
                 const docId = doc.id;
-                await updateDoc(userRef, {
-                    posts: arrayUnion({
-                        postId: docId,
-                        postTitle: value.title,
-                        postDescription: value.description
-                    })
-                });
+                await setDoc(userRef, {
+                    posts: {
+                        [docId]: {
+                            postTitle: value.title,
+                            postDescription: value.description
+                        }
+                    }
+                }, { merge: true });
             });
             await batch.commit();
             runSuccessfulPostCreation();
