@@ -30,7 +30,7 @@ function App() {
                     
                     <Route path='/create-thread' element={<RouteGuard> <CreateThread /> </RouteGuard>} />
                     <Route path='/account' element={<RouteGuard>  <Account /></RouteGuard>} />
-                    <Route path='/account/:id/edit' element={<RouteGuard>  <EditAccount /></RouteGuard>} />
+                    <Route path='/account/:id/edit' element={<EditAccount />} />
                     <Route path='/register' element={<Register />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/logout' element={<Logout />} />

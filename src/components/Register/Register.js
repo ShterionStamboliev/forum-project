@@ -13,7 +13,8 @@ import {
     runEmptyConfirmPasswordField,
     runPasswordEqualityCheck,
     runSuccessfulRegistration,
-    runPasswordLengthError
+    runPasswordLengthError,
+    runEmptyNameError
 } from "../../utils/alerts";
 import './Register.css'
 
@@ -24,8 +25,7 @@ const Register = () => {
     const [value, setValue] = useState({
         email: '',
         password: '',
-        firstName: '',
-        lastName: '',
+        name: '',
         username: '',
         confirmPassword: '',
     });
@@ -62,12 +62,8 @@ const Register = () => {
                 return runPasswordEqualityCheck();
             };
 
-            if (value.firstName === '') {
-                return runEmptyFirstNameError();
-            };
-
-            if (value.lastName === '') {
-                return runEmptyLastNameError();
+            if (value.name === '') {
+                return runEmptyNameError();
             };
 
             if (value.username === '') {
@@ -79,15 +75,15 @@ const Register = () => {
                     const user = userCredentials.user;
                     const docRef = doc(db, 'users', user.uid);
                     await setDoc(docRef, {
-                        firstName: value.firstName,
-                        lastName: value.lastName,
+                        name: value.name,
                         email: value.email,
                         username: value.username,
                         createdOn: new Date().toLocaleDateString(),
+                        posts: []
                     });
+                    runSuccessfulRegistration();
+                    navigate('/');
                 });
-            runSuccessfulRegistration();
-            navigate('/');
         } catch (error) {
             console.log(error.message);
         };
@@ -102,25 +98,13 @@ const Register = () => {
             <form method="POST">
 
                 <div className="first-name">
-                    <label className="first-name-label" htmlFor="fname">First name</label>
+                    <label className="first-name-label" htmlFor="fname">Name</label>
                     <input
                         className="first-name-input"
-                        name="firstName"
+                        name="name"
                         type="text"
                         placeholder="First name"
-                        value={value.firstName}
-                        onChange={handleEventSubmit}
-                    />
-                </div>
-
-                <div className="last-name">
-                    <label className="last-name-label" htmlFor="lname">Last name</label>
-                    <input
-                        className="last-name-input"
-                        name="lastName"
-                        type="text"
-                        placeholder="Last name"
-                        value={value.lastName}
+                        value={value.name}
                         onChange={handleEventSubmit}
                     />
                 </div>

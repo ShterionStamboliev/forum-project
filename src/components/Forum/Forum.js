@@ -22,7 +22,6 @@ const Forum = () => {
                         });
                     });
                     setThreads(threadsArr);
-                    localStorage.setItem('forum', JSON.stringify(threadsArr));
                 })
         } catch (error) {
             console.log(error.message);

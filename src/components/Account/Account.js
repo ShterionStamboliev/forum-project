@@ -1,161 +1,146 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar } from '@mui/material';
-import { UseAuth, uploadImage } from '../../contexts/AuthContext';
+import { UseAuth } from '../../contexts/AuthContext';
 import './Account.css';
-import { deleteObject, getMetadata, ref } from 'firebase/storage';
+import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from '../../config/firebase';
-import { deleteField, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { deleteField, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import IconButton from '@mui/material/IconButton';
 import { PhotoCamera } from '@mui/icons-material';
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete'
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import Swal from 'sweetalert2';
+import { updateProfile } from 'firebase/auth';
 
 const Account = () => {
 
     const [image, setImage] = useState(null);
-    const [imageUrl, setImageUrl] = useState(null);
+    const [imageUrl, setImageUrl] = useState('');
     const [userData, setUserData] = useState([]);
+    const [isClicked, setIsClicked] = useState(false);
     const { user } = UseAuth();
 
-    const dataRef = async () => {
-        const userRef = doc(db, 'users', user.uid);
-        const userDataRef = await getDoc(userRef);
-        if (userDataRef.exists()) {
-            const data = [{ ...userDataRef.data(), id: userDataRef.id }]
-            setUserData(data);
-        };
+    const uploadImage = () => {
+        if (!image) return;
+
+        const imageRef = ref(storage, `${user.uid}/images/`);
+        uploadBytes(imageRef, image).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                setImageUrl(url);
+                setDoc(doc(db, 'users', user.uid), {
+                    photo: url
+                }, { merge: true })
+                updateProfile(user, {
+                    photoURL: url
+                });
+            });
+        });
+        setIsClicked(true);
     };
 
-    useEffect(() => {
-        const controller = new AbortController();
-        dataRef();
-        return () => controller.abort();
-    }, []);
-
+    const dataRef = async () => {
+        try {
+            const userRef = doc(db, 'users', user.uid);
+            const userDataRef = await getDoc(userRef);
+            if (userDataRef.exists()) {
+                const data = [{ ...userDataRef.data(), id: userDataRef.id }]
+                setUserData(data);
+            };
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
     const handleImageChange = (e) => {
-        e.preventDefault();
         if (e.target.files[0]) {
             setImage(e.target.files[0]);
         };
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        uploadImage(image, user).then(() => {
-            Swal.fire({
-                title: 'Your avatar is set!',
-                showClass: {
-                    popup: 'animate__animated animate__fadeInDown'
-                },
-                hideClass: {
-                    popup: 'animate__animated animate__fadeOutUp'
-                }
-            });
-        });
-    };
-
     useEffect(() => {
+        const controller = new AbortController();
         if (user?.photoURL) {
             setImageUrl(user.photoURL);
+            dataRef();
         };
+        return () => controller.abort();
     }, [user]);
 
     const handleDelete = () => {
         const fileRef = ref(storage, `${user.uid}/images/`);
-        getMetadata(fileRef).then(() => {
-            deleteObject(fileRef).then(async () => {
-                const userRef = doc(db, 'users', user.uid);
-                const swalWithBootstrapButtons = Swal.mixin({
-                    customClass: {
-                        confirmButton: 'btn btn-success',
-                        cancelButton: 'btn btn-danger'
-                    },
-                    buttonsStyling: false
-                })
-                swalWithBootstrapButtons.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Remove avatar',
-                    cancelButtonText: 'Cancel',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        updateDoc(userRef, {
-                            photo: deleteField()
-                        });
-                        swalWithBootstrapButtons.fire(
-                            'Deleted!',
-                            'Avatar removed',
-                            'success'
-                        )
-                    } else if (result.dismiss === Swal.DismissReason.cancel) {
-                        swalWithBootstrapButtons.fire(
-                            'Cancelled',
-                            'error'
-                        );
-                    };
-                });
-
-            }).catch((error) => {
-                console.log(error.message);
+        deleteObject(fileRef).then(() => {
+            const userRef = doc(db, 'users', user.uid);
+            updateDoc(userRef, {
+                photo: deleteField()
             });
+            setIsClicked(false);
+        }).catch((error) => {
+            console.log(error.message);
         });
+        setIsClicked(true);
     };
+    
+    // MAKE COMPONENT AND STATE FOR EDIT PROFILE TO SHOW INPUT FIELDS
 
     return (
         <div className='account-wrapper'>
             <div className="account-info-wrapper">
                 <div className="account-image">
-                    <Avatar onChange={handleImageChange} className="user-avatar"
+                    <Avatar className="user-avatar"
                         src={imageUrl}
                         sx={{ width: 90, height: 90 }}
                     />
                 </div>
 
                 <Stack className='upload-img' direction="row" alignItems="center" spacing={2}>
-                    <IconButton onChange={handleImageChange} className='upload-img' color="primary" aria-label="upload picture" component="label">
+                    <IconButton onChange={handleImageChange} sx={{ color: '#0088A9' }} className='upload-img' color="primary" aria-label="upload picture" component="label">
                         <input hidden accept="image/*" type="file" />
-                        <PhotoCamera />
+                        <PhotoCamera sx={{ color: '#0088A9' }} />
                     </IconButton>
                 </Stack>
 
-                <Stack className='submit-img' direction="row" spacing={2}>
-                    <Button onClick={handleSubmit}
-                        sx={{
-                            fontSize: '12px',
-                            borderRadius: '50px',
-                            fontFamily: 'Montserrat, sans-serif'
-                        }}
-                        variant="contained" endIcon={<CloudUploadIcon />}>
-                        Upload
-                    </Button>
-                </Stack>
+                {!isClicked ?
+                    <Stack className='submit-img' direction="row" spacing={2}>
+                        <Button onClick={uploadImage}
+                            sx={{
+                                fontSize: '12px',
+                                borderRadius: '50px',
+                                fontFamily: 'Montserrat, sans-serif',
+                                backgroundColor: '#0088A9',
+                                ":hover": { backgroundColor: '#0099CC' }
+                            }}
+                            variant="contained" endIcon={<CloudUploadIcon />}>
+                            Upload
+                        </Button>
+                    </Stack> :
+                    <Stack className='remove-img' direction="row" spacing={2}>
+                        <Button onClick={handleDelete} disabled={!isClicked}
+                            variant="contained"
+                            sx={{
+                                fontSize: '12px',
+                                borderRadius: '50px',
+                                backgroundColor: '#0088A9',
+                                color: 'white',
+                                ":hover": { backgroundColor: '#0099CC' }
+                            }}
+                            startIcon={<DeleteIcon />}>
+                            Remove
+                        </Button>
+                    </Stack>}
 
-                {/* <Stack className='remove-img' direction="row" spacing={2}>
-                    <Button onClick={handleDelete} variant="outlined" sx={{ backgroundColor: '#1976d2', color: 'white' }} startIcon={<DeleteIcon />}>
-                        Remove
-                    </Button>
-                </Stack> */}
-                    
-                    
                 <Stack className='edit-account-profile' direction="row" spacing={2}>
                     <Button href={`/account/${user.uid}/edit`} variant="contained"
                         sx={{
-                            backgroundColor: '#1976d2',
+                            backgroundColor: '#0088A9',
                             color: 'white',
                             fontSize: '12px',
                             borderRadius: '50px',
-                            fontFamily: 'Montserrat, sans-serif'
+                            fontFamily: 'Montserrat, sans-serif',
+                            ":hover": { backgroundColor: '#0099CC' }
                         }}>
                         Edit profile
                     </Button>
-                    
                 </Stack>
 
                 {Object.values(userData).map((user) => {
@@ -165,9 +150,13 @@ const Account = () => {
                             {user.username}
                         </div>
 
-                        <div className="account-threads">
-                            Active threads {Object.keys(user.posts).length}
-                        </div>
+                        {Object.keys(user.posts).length > 0 ?
+                            <div className="account-threads">
+                                Active threads: {Object.keys(user.posts).length}
+                            </div>
+                            : <div className="account-threads">
+                                Active threads: 0
+                            </div>}
 
                         <div className="user-info">
                             Profile information
@@ -186,12 +175,11 @@ const Account = () => {
                         </div>
 
                         <div className="account-names">
-                            {user.firstName} {user.lastName}
+                            {user.name}
                         </div>
 
                     </React.Fragment>
-                })};
-
+                })}
             </div>
         </div>
     );

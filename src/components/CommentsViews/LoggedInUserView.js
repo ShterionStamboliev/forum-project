@@ -12,7 +12,6 @@ const LoggedInUserView = ({ thread }) => {
     const { id } = useParams();
 
     const userImageProfile = user?.photoURL;
-
     const currentUserEmail = user.email;
 
     const batch = writeBatch(db);

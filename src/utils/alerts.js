@@ -145,10 +145,10 @@ export const runPasswordLengthError = () => {
     });
 }
 
-export const runEmptyFirstNameError = () => {
+export const runEmptyNameError = () => {
     return Swal.fire({
         icon: 'error',
-        title: 'Please enter your first name.',
+        title: 'Please enter your name.',
     });
 };
 
