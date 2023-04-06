@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Swal from 'sweetalert2';
 import { UseAuth } from '../../contexts/AuthContext';
-import { deleteField, doc, setDoc, updateDoc } from 'firebase/firestore';
+import { collection, deleteField, doc, getDocs, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import { runEmptyFieldAlert } from '../../utils/alerts';
 import { useNavigate } from 'react-router-dom';
 import './EditAccount.css'
@@ -96,7 +96,6 @@ const EditAccount = () => {
                         email: value.email,
                         username: value.username,
                         name: value.name
-
                     }).then(() => {
                         Swal.fire('Saved', '', 'success')
                         updateEmail(user, value.email)
@@ -105,7 +104,7 @@ const EditAccount = () => {
                 } else if (result.isDenied) {
                     Swal.fire('Cancelled', '', 'info')
                     return;
-                }
+                };
             });
         } catch (error) {
             console.log(error.message);
@@ -127,7 +126,11 @@ const EditAccount = () => {
                 </div>
 
                 <Stack className='edit-upload-img' direction="row" alignItems="center" spacing={2}>
-                    <IconButton onChange={handleImageChange} className='edit-upload-img' color="primary" aria-label="upload picture" component="label">
+                    <IconButton onChange={handleImageChange}
+                        className='edit-upload-img'
+                        color="primary"
+                        aria-label="upload picture"
+                        component="label">
                         <input hidden accept="image/*" type="file" />
                         <PhotoCamera sx={{ color: '#0088A9' }} />
                     </IconButton>

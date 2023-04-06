@@ -31,25 +31,25 @@ const EditThread = () => {
             return;
         };
         try {
-            await updateDoc(docSnap, {
-                'post.postTitle': value.title,
-                'post.postDescription': value.comment,
-                'post.lastUpdated': new Date().toLocaleDateString()
-            }).then(() => {
-                Swal.fire({
-                    title: 'Do you want to save the changes?',
-                    showDenyButton: true,
-                    showCancelButton: true,
-                    confirmButtonText: 'Save',
-                    denyButtonText: `Don't save`,
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire('Saved!', '', 'success')
-                            .then(() => navigate('/forum'))
-                    } else if (result.isDenied) {
-                        Swal.fire('Changes are not saved', '', 'info')
-                    }
-                });
+            Swal.fire({
+                title: 'Do you want to save the changes?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    updateDoc(docSnap, {
+                        'post.postTitle': value.title,
+                        'post.postDescription': value.comment,
+                        'post.lastUpdated': new Date().toLocaleDateString(),
+                        'author.photo': user.photoURL
+                    })
+                    Swal.fire('Saved!', '', 'success')
+                        .then(() => navigate('/forum'))
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
             });
         } catch (error) {
             console.log(error.message);

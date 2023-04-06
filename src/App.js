@@ -6,7 +6,6 @@ import Login from './components/Login/Login';
 import CreateThread from './components/CreateThread/CreateThread';
 import Footer from './components/Footer/Footer';
 import EditThread from './components/Thread/EditThread';
-import Navigation from './components/Navigation/Navigation';
 import Account from './components/Account/Account';
 import { AuthContextProvider } from './contexts/AuthContext';
 import RouteGuard from './components/RouteGuard/RouteGuard';
@@ -14,6 +13,7 @@ import PageNotFound from './components/PageNotFound/PageNotFound';
 import Logout from './components/Logout/Logout';
 import ThreadDetails from './components/ThreadDetails/ThreadDetails';
 import EditAccount from './components/EditAccount/EditAccount'
+import Navigation from './components/Navigation/Navigation'
 
 function App() {
 
@@ -21,7 +21,6 @@ function App() {
         <main>
             <AuthContextProvider>
                 <Navigation />
-
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/forum' element={<Forum />} />

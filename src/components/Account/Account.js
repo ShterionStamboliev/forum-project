@@ -62,7 +62,7 @@ const Account = () => {
 
     useEffect(() => {
         const controller = new AbortController();
-        if (user?.photoURL) {
+        if (user) {
             setImageUrl(user.photoURL);
             dataRef();
         };
@@ -82,8 +82,6 @@ const Account = () => {
         });
         setIsClicked(true);
     };
-
-    // MAKE COMPONENT AND STATE FOR EDIT PROFILE TO SHOW INPUT FIELDS
 
     return (
         <div className='account-wrapper'>

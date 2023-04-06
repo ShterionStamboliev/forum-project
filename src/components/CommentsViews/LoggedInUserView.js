@@ -52,7 +52,7 @@ const LoggedInUserView = ({ thread }) => {
                         </div>
 
                             <Avatar className="user-thread-icon"
-                                src={x.author.photo}
+                                src={x.author.photo} alt='User icon'
                                 sx={{ width: 56, height: 56 }}
                             />
 
@@ -67,7 +67,7 @@ const LoggedInUserView = ({ thread }) => {
                     <div className="grid-wrapper-comment">
 
                         <div className="user-comments-name">
-                            {currentUserEmail}
+                            {user.displayName}
                         </div>
 
                             <Avatar className="user-comments-img"

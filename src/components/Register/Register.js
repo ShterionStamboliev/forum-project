@@ -15,6 +15,7 @@ import {
     runEmptyNameError
 } from "../../utils/alerts";
 import './Register.css'
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
     const { createUser } = UseAuth();
@@ -78,6 +79,9 @@ const Register = () => {
                         username: value.username,
                         createdOn: new Date().toLocaleDateString(),
                         posts: []
+                    });
+                    updateProfile(user, {
+                        displayName: value.name
                     });
                     runSuccessfulRegistration();
                     navigate('/');

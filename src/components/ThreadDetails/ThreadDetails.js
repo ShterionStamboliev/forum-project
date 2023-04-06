@@ -1,4 +1,4 @@
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { db } from '../../config/firebase';
@@ -18,25 +18,35 @@ const ThreadDetails = () => {
     const threadRef = doc(db, 'threads', id);
     const currentUserId = user?.uid;
 
+        console.log(user.displayName);
+
     const owners = () => getDoc(threadRef)
-        .then((res) => {
-            const usr = res.get('author.owner');
-            const owner = usr === currentUserId;
-            return owner;
-        });
+    .then((res) => {
+        const usr = res.get('author.owner');
+        const owner = usr === currentUserId;
+        return owner;
+    });
 
     const prom = Promise.resolve(owners());
     prom.then(function (val) {
         const owner = val;
         return owner;
     });
+    
+    const avatarUpdate = async () => {
+        await updateDoc(threadRef, {
+            'author.photo': user.photoURL
+        });
+    };
 
     useEffect(() => {
         const abortController = new AbortController();
         owners().then((res) => setIsOwner(res));
-
+        if (isOwner) {
+            avatarUpdate();
+        }
         return () => abortController.abort();
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         try {
@@ -55,10 +65,10 @@ const ThreadDetails = () => {
         <div className="wrapper">
             {isOwner ?
                 <OwnerView thread={thread} /> :
-                !isOwner && user ? 
-                <LoggedInUserView thread={thread} /> :
-                    !isOwner && !user ? 
-                    <GuestView thread={thread} /> :
+                !isOwner && user ?
+                    <LoggedInUserView thread={thread} /> :
+                    !isOwner && !user ?
+                        <GuestView thread={thread} /> :
                         null}
         </div>
     )

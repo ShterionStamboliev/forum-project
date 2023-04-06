@@ -40,8 +40,8 @@ const CreateThread = () => {
             await addDoc(threadsCollection, {
                 author: {
                     owner: auth?.currentUser?.uid,
-                    name: auth?.currentUser?.email,
-                    photo: auth?.currentUser.photoURL
+                    name: auth?.currentUser?.displayName,
+                    photo: auth?.currentUser?.photoURL
                 },
                 post: {
                     postTitle: value.title,

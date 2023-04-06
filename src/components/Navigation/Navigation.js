@@ -2,16 +2,9 @@ import { Link } from 'react-router-dom';
 import { UseAuth } from '../../contexts/AuthContext';
 import Logout from '../Logout/Logout';
 import './Navigation.css';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../config/firebase';
-import { useEffect, useState } from 'react';
 
 const UserAuth = () => {
     const { user } = UseAuth();
-    const [userEmail, setUserEmail] = useState('');
-
-
-
 
     return (
         <header className='nav__box'>

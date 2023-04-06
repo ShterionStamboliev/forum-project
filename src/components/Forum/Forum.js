@@ -9,7 +9,6 @@ const Forum = () => {
     const [threads, setThreads] = useState([]);
     const threadsCollectionRef = collection(db, "threads");
 
-    
     useEffect(() => {
         try {
             getDocs(threadsCollectionRef)
