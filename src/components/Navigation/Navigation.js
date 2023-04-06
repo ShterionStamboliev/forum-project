@@ -2,9 +2,16 @@ import { Link } from 'react-router-dom';
 import { UseAuth } from '../../contexts/AuthContext';
 import Logout from '../Logout/Logout';
 import './Navigation.css';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../config/firebase';
+import { useEffect, useState } from 'react';
 
 const UserAuth = () => {
     const { user } = UseAuth();
+    const [userEmail, setUserEmail] = useState('');
+
+
+
 
     return (
         <header className='nav__box'>
@@ -16,7 +23,7 @@ const UserAuth = () => {
                     <ul className='auth__buttons'>
                         <li className='create__button'><Link to='/create-thread'>Create Post</Link></li>
                         <li className='forum__page'><Link to='/forum'>Forum page</Link></li>
-                        <li className='user__greeting'>{`Welcome, ${user?.email}`}</li>
+                        <li className='user__greeting'>{`Welcome, ${user.email}`}</li>
                         <li className='account__page'><Link to='/account'>Account</Link></li>
                         <Logout />
                     </ul>

@@ -1,47 +1,45 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;1,300&display=swap");
-
-.account-wrapper {
+.edit-account-wrapper {
   display: grid;
   margin: 10px auto 0 auto;
   max-width: 70%;
   padding-bottom: 150px;
 }
 
-.account-info-wrapper {
+.edit-account-info-wrapper {
   display: grid;
   grid-template-areas:
-    "avatar username "
-    "browse info "
-    "email e-address "
-    "user names "
-    "editUsername usernameInput  "
-    ". submitUpdate";
+    "edit-avatar username "
+    "edit-browse edit-info "
+    "edit-email edit-e-address "
+    "edit-user edit-names "
+    "edit-username edit-username-input"
+    "c submit-edit-button  ";
   grid-template-columns: 0.5fr 5fr;
-  grid-auto-rows: 1.25fr 0.75fr 0.75fr 0.75fr 0.75fr;
+  grid-auto-rows: 1.25fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr;
   margin: 10px auto 0 auto;
   width: 800px;
   border: 1px solid #737373;
   border-radius: 4px;
 }
 
-.account-image {
-  grid-area: avatar;
+.edit-account-image {
+  grid-area: edit-avatar;
   margin: 15px;
 }
 
-.user-avatar {
+.edit-user-avatar {
   margin-left: 4px;
 }
 
-.upload-img {
-  grid-area: avatar;
+.edit-upload-img {
+  grid-area: edit-avatar;
   position: relative;
   left: 47px;
   top: 23px;
 }
 
-.submit-img {
-  grid-area: browse;
+.edit-submit-img {
+  grid-area: edit-browse;
   position: relative;
   padding: 15px 0px;
   bottom: 12px;
@@ -50,25 +48,27 @@
   height: 40px;
 }
 
-.remove-img {
-  grid-area: browse;
-  padding-bottom: 35px;
-  width: 125px;
+.edit-remove-img {
+  grid-area: edit-browse;
   position: relative;
-  left: 5px;
+  padding: 15px 0px;
+  bottom: 12px;
+  left: 7px;
+  width: 120px;
+  height: 40px;
 }
 
-.edit-currentuser-username {
-  grid-area: usernameInput;
+.edit-account-threads {
+  grid-area: edit-username;
   color: #ecf0f1;
-  margin-top: 25px;
-  margin-right: 15px;
-  margin-bottom: 22px;
-  margin-left: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  position: relative;
+  top: 35px;
 }
 
 .edit-email-icon {
-  grid-area: email;
+  grid-area: edit-email;
   color: #ecf0f1;
   max-width: 87px;
   max-height: 48px;
@@ -78,49 +78,18 @@
 }
 
 .edit-account-email {
-  grid-area: e-address;
+  grid-area: edit-e-address;
   margin-top: 25px;
   margin-right: 15px;
   margin-bottom: 22px;
   color: #ecf0f1;
   margin-left: 5px;
-}
-
-.update-email {
   background-color: #333333;
-  border: 1px solid #ecf0f1;
-  color: #ecf0f1;
-}
-
-.update-name {
-  background-color: #333333;
-  border: 1px solid #ecf0f1;
-  color: #ecf0f1;
-}
-
-.update-username {
-  background-color: #333333;
-  border: 1px solid #ecf0f1;
-  color: #ecf0f1;
-}
-
-.update-email:focus {
-  border: 1px solid rgba(0, 136, 169, 1);
-  box-shadow: 0 0 10px rgba(0, 136, 169, 1);
-}
-
-.update-username:focus {
-  border: 1px solid rgba(0, 136, 169, 1);
-  box-shadow: 0 0 10px rgba(0, 136, 169, 1);
-}
-
-.update-name:focus {
-  border: 1px solid rgba(0, 136, 169, 1);
-  box-shadow: 0 0 10px rgba(0, 136, 169, 1);
+  border: none;
 }
 
 .edit-account-user-icon {
-  grid-area: user;
+  grid-area: edit-user;
   position: relative;
   top: 25.5px;
   left: 65px;
@@ -130,45 +99,62 @@
   font-weight: bold;
 }
 
-.account-email-input {
-  background-color: #333333;
-  border: none;
-  color: #ecf0f1;
-}
-
 .edit-account-name {
-  grid-area: names;
+  grid-area: edit-names;
   color: #ecf0f1;
   margin-top: 25px;
   margin-right: 15px;
   margin-bottom: 22px;
   margin-left: 5px;
+  background-color: #333333;
+  border: none;
+}
+
+.edit-username-icon {
+  grid-area: edit-username;
+  position: relative;
+  top: 5px;
+  left: 550px;
+  width: 130px;
+  height: 40px;
+}
+
+.edit-currentuser-username {
+  grid-area: edit-username-input;
+  margin-top: 25px;
+  margin-right: 15px;
+  margin-bottom: 22px;
+  color: #ecf0f1;
+  margin-left: 5px;
+  background-color: #333333;
+  border: none;
 }
 
 .edit-user-info {
-  grid-area: info;
+  grid-area: edit-info;
   color: #ecf0f1;
   margin-right: 15px;
   margin-top: 45px;
   border-bottom: 1px solid #ecf0f1;
 }
 
-.submit-account-profile {
-  grid-area: submitUpdate;
+.edit-submit-account-profile {
+  grid-area: submit-edit-button;
   position: relative;
-  top: 5px;
+  padding: 15px 0px;
+  top: 0px;
   left: 280px;
-  width: 130px;
+  width: 120px;
   height: 40px;
 }
 
 .edit-account-username {
-  grid-area: editUsername;
+  grid-area: edit-username;
   position: relative;
   top: 25.5px;
-  left: 30px;
+  left: 28px;
   color: #ecf0f1;
   max-width: 87px;
   max-height: 48px;
   font-weight: bold;
-} */
+}

@@ -14,7 +14,7 @@
     "browse info "
     "email e-address "
     "user names "
-    "c removeImg  ";
+    "c c  ";
   grid-template-columns: 0.5fr 5fr;
   grid-auto-rows: 1.25fr 0.75fr 0.75fr 0.75fr 0.75fr;
   margin: 10px auto 0 auto;
@@ -94,19 +94,6 @@
   margin-left: 5px;
 }
 
-.account-email-edit {
-  grid-area: e-address;
-  position: relative;
-  left: 638px;
-  top: 20px;
-}
-
-.account-username-edit {
-  grid-area: username;
-  position: relative;
-  left: 638px;
-}
-
 .account-user-icon {
   grid-area: user;
   position: relative;
@@ -127,7 +114,7 @@
 .account-names {
   grid-area: names;
   color: #ecf0f1;
-  margin-top: 25px;
+  margin-top: 26px;
   margin-right: 15px;
   margin-bottom: 22px;
   margin-left: 5px;
@@ -141,13 +128,6 @@
   border-bottom: 1px solid #ecf0f1;
 }
 
-.account-names-edit {
-  grid-area: names;
-  position: relative;
-  left: 638px;
-  top: 20px;
-}
-
 .edit-account-profile {
   grid-area: username;
   position: relative;
@@ -155,5 +135,4 @@
   left: 550px;
   width: 130px;
   height: 40px;
-
 }

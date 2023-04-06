@@ -12,6 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { updateProfile } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 
 const Account = () => {
 
@@ -19,6 +20,7 @@ const Account = () => {
     const [imageUrl, setImageUrl] = useState('');
     const [userData, setUserData] = useState([]);
     const [isClicked, setIsClicked] = useState(false);
+
     const { user } = UseAuth();
 
     const uploadImage = () => {
@@ -80,7 +82,7 @@ const Account = () => {
         });
         setIsClicked(true);
     };
-    
+
     // MAKE COMPONENT AND STATE FOR EDIT PROFILE TO SHOW INPUT FIELDS
 
     return (
@@ -94,7 +96,12 @@ const Account = () => {
                 </div>
 
                 <Stack className='upload-img' direction="row" alignItems="center" spacing={2}>
-                    <IconButton onChange={handleImageChange} sx={{ color: '#0088A9' }} className='upload-img' color="primary" aria-label="upload picture" component="label">
+                    <IconButton onChange={handleImageChange}
+                        sx={{ color: '#0088A9' }}
+                        className='upload-img'
+                        color="primary"
+                        aria-label="upload picture"
+                        component="label">
                         <input hidden accept="image/*" type="file" />
                         <PhotoCamera sx={{ color: '#0088A9' }} />
                     </IconButton>
@@ -102,7 +109,7 @@ const Account = () => {
 
                 {!isClicked ?
                     <Stack className='submit-img' direction="row" spacing={2}>
-                        <Button onClick={uploadImage}
+                        <Button onClick={uploadImage} disabled={isClicked}
                             sx={{
                                 fontSize: '12px',
                                 borderRadius: '50px',
@@ -130,17 +137,19 @@ const Account = () => {
                     </Stack>}
 
                 <Stack className='edit-account-profile' direction="row" spacing={2}>
-                    <Button href={`/account/${user.uid}/edit`} variant="contained"
-                        sx={{
-                            backgroundColor: '#0088A9',
-                            color: 'white',
-                            fontSize: '12px',
-                            borderRadius: '50px',
-                            fontFamily: 'Montserrat, sans-serif',
-                            ":hover": { backgroundColor: '#0099CC' }
-                        }}>
-                        Edit profile
-                    </Button>
+                    <Link to={`/account/${user.uid}/edit`}>
+                        <Button
+                            variant="contained"
+                            sx={{
+                                backgroundColor: '#0088A9',
+                                color: 'white',
+                                fontSize: '12px',
+                                borderRadius: '50px',
+                                ":hover": { backgroundColor: '#0099CC' }
+                            }}>
+                            Edit profile
+                        </Button>
+                    </Link>
                 </Stack>
 
                 {Object.values(userData).map((user) => {

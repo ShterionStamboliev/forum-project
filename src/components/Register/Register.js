@@ -7,8 +7,6 @@ import {
     runEmailLengthError,
     runEmptyEmailField,
     runEmptyPasswordField,
-    runEmptyFirstNameError,
-    runEmptyLastNameError,
     runEmptyUsernameError,
     runEmptyConfirmPasswordField,
     runPasswordEqualityCheck,
