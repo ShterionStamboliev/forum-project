@@ -13,13 +13,13 @@ body {
 
 .grid-wrapper {
   display: grid;
-  grid-template-areas: 
-  "user-name title . ."
-  "user-img desc desc ."
-  "edit desc desc .";
+  grid-template-areas:
+    "user-name title . ."
+    "user-img desc desc ."
+    "edit desc desc .";
   width: 100%;
   height: 200px;
-  grid-template-columns: 0.80fr 6fr 12fr;
+  grid-template-columns: 0.8fr 6fr 12fr;
   grid-template-rows: 1fr 4fr 2fr;
   padding: 12px;
   max-width: 1200px;
@@ -29,9 +29,9 @@ body {
 .grid-wrapper-comment {
   display: grid;
   grid-template-areas:
-  "user-comment-name . . ."
-  "user-comment-img txt txt txt"
-  ". . . submit";
+    "user-comment-name . . ."
+    "user-comment-img txt txt txt"
+    ". . . submit";
   width: 100%;
   height: 200px;
   grid-template-columns: 0.75fr 1.25fr 5fr;
@@ -43,11 +43,11 @@ body {
 .grid-comments {
   display: grid;
   grid-template-areas:
-  "name . . ." 
-  "usr-img comment comment .";
+    "name . . ."
+    "usr-img comment comment .";
   width: 100%;
   height: 200px;
-  grid-template-columns: 0.80fr 6fr 12fr;
+  grid-template-columns: 0.8fr 6fr 12fr;
   grid-template-rows: 1fr 1fr 1fr;
   padding: 12px;
   max-width: 1200px;
@@ -55,11 +55,11 @@ body {
 }
 
 .user-thread-name {
-    grid-area: user-name;
-    border-radius: 5px;
-    color: #ecf0f1;
-    font-size: 16px;
-    margin-top: 30px;
+  grid-area: user-name;
+  border-radius: 5px;
+  color: #ecf0f1;
+  font-size: 16px;
+  margin-top: 30px;
 }
 
 .current-thread-title {
@@ -93,21 +93,18 @@ body {
 }
 
 .thread-edit-button {
-  grid-area: user-img;
+  grid-area: edit;
   color: #ecf0f1;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease 0s;
-  position: relative;
-  top: 79px;
-  left: 56px;
-  max-width: 18px;
-  max-height: 18px;
+  text-decoration: none;
+  max-width: 65px;
+  max-height: 30px;
+  border-radius: 50px;
+  padding-left: 10px;
 }
 
-.thread-edit-button:hover {
-  background-color: rgba(0, 136, 169, 0.8);
-}
 
 .user-comment-icon {
   grid-area: usr-img;
@@ -132,9 +129,9 @@ body {
 
 .user-comment-name {
   grid-area: name;
-	border-radius: 5px;
-	color: #ecf0f1;
-	font-size: 16px;
+  border-radius: 5px;
+  color: #ecf0f1;
+  font-size: 16px;
   margin-top: 80px;
 }
 
@@ -153,11 +150,10 @@ body {
 
 .user-comments-name {
   grid-area: user-comment-name;
-	border-radius: 5px;
-	color: #ecf0f1;
-	font-size: 16px;
+  border-radius: 5px;
+  color: #ecf0f1;
+  font-size: 16px;
   margin-top: 30px;
-  
 }
 
 .user-comments-img {
@@ -193,7 +189,6 @@ body {
 }
 
 .comment-button:hover {
-
   background-color: rgba(0, 136, 169, 0.8);
 }
 
