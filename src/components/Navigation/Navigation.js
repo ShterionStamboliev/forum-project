@@ -39,7 +39,7 @@ const Navigation = () => {
 
                 <div className="nav-grid-wrapper-guest">
                     <div className="nav-home">
-                        <Link to='/'>Home</Link>
+                        <Link to='/'>D4jsp</Link>
                     </div>
 
                     <div className="nav-forum-page">

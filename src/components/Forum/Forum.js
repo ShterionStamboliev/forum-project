@@ -27,43 +27,48 @@ const Forum = () => {
     }, []);
 
     return (
-        <div className="forum-wrapper-title">
+        <div className="forum-background-body">
 
-            <div className="forum-wrapper-header">
+            <div className="forum-wrapper-title">
 
-                <div className="forum-topic-col">
-                    Thread title
+                <div className="forum-wrapper-header">
+
+                    <div className="forum-topic-col">
+                        Thread title
+                    </div>
+
+                    <div className="forum-author-col">
+                        Author
+                    </div>
+
+                    <div className="forum-posted-col">
+                        Posted at
+                    </div>
+
                 </div>
 
-                <div className="forum-author-col">
-                    Author
-                </div>
+                {threads.length > 0 ? Object.values(threads).map((thread) => {
+                    return <div className="forum-wrapper" key={thread.id}>
 
-                <div className="forum-posted-col">
-                    Posted at
-                </div>
+                        <div className="forum-thread-title">
+                            <Link to={`/forum/` + thread.id} className="forum-thread-link">{thread.post.postTitle}</Link>
+                        </div>
+
+                        <div className="forum-author-name">
+                            {thread.author.name}
+                        </div>
+
+                        <div className="forum-post-date">
+                            {thread.post.postedOn} at {thread.post.postedAt}
+                        </div>
+
+                    </div>
+                }) : null}
 
             </div>
 
-            {threads.length > 0 ? Object.values(threads).map((thread) => {
-                return <div className="forum-wrapper" key={thread.id}>
-
-                    <div className="forum-thread-title">
-                        <Link to={`/forum/` + thread.id} className="forum-thread-link">{thread.post.postTitle}</Link>
-                    </div>
-
-                    <div className="forum-author-name">
-                        {thread.author.name}
-                    </div>
-
-                    <div className="forum-post-date">
-                       {thread.post.postedOn} at {thread.post.postedAt}
-                    </div>
-
-                </div>
-            }) : null}
-
         </div>
+
     );
 };
 

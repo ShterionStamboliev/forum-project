@@ -9,7 +9,7 @@
 
 .nav-grid-wrapper-user {
   display: grid;
-  grid-template-areas: "home img forum create . . . . . . . greet account logout";
+  grid-template-areas: "home forum create . . . . . . . . . . greet account logout";
   width: 100%;
   height: 70px;
   max-width: 100%;
@@ -23,7 +23,7 @@
 
 .nav-grid-wrapper-guest {
   display: grid;
-  grid-template-areas: "home img forum . . . . . . greetGuess login register";
+  grid-template-areas: "home forum . . . . . . . . . . . greetGuess login register";
   width: 100%;
   height: 70px;
   max-width: 100%;
@@ -48,6 +48,7 @@
 .nav-login-page a {
   text-decoration: none;
   color: #ecf0f1;
+  padding-right: 10px;
 }
 
 .nav-login-page a:hover {
@@ -62,11 +63,13 @@
 .nav-register-page {
   grid-area: register;
   font-size: 25px;
+  justify-self: start;
 }
 
 .nav-register-page a {
   text-decoration: none;
   color: #ecf0f1;
+  padding-left: 10px;
 }
 
 .nav-register-page a:hover {
