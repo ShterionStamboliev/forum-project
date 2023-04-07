@@ -1,35 +1,64 @@
 import { Link } from 'react-router-dom';
 import { UseAuth } from '../../contexts/AuthContext';
 import Logout from '../Logout/Logout';
-import './Navigation.css';
+import './Navigation.css'
 
-const UserAuth = () => {
+const Navigation = () => {
     const { user } = UseAuth();
 
     return (
-        <header className='nav__box'>
-            <Link to='/'>
-                <span className='nav__home'>Home</span>
-            </Link>
+        <div className="nav-grid">
             {user ?
-                <nav className='nav__links'>
-                    <ul className='auth__buttons'>
-                        <li className='create__button'><Link to='/create-thread'>Create Post</Link></li>
-                        <li className='forum__page'><Link to='/forum'>Forum page</Link></li>
-                        <li className='user__greeting'>{`Welcome, ${user.email}`}</li>
-                        <li className='account__page'><Link to='/account'>Account</Link></li>
+                <div className="nav-grid-wrapper-user">
+                    <div className="nav-home">
+                        <Link to='/'>D4jsp</Link>
+                    </div>
+
+                    <div className="nav-create-post">
+                        <Link to='/create-thread'>Create Post</Link>
+                    </div>
+
+                    <div className="nav-forum-page">
+                        <Link to='/forum'>Forum page</Link>
+                    </div>
+
+                    <div className="nav-greet-user">
+                        {`Welcome, ${user.displayName}`}
+                    </div>
+
+                    <div className="nav-account-page">
+                        <Link to='/account'>Account</Link>
+                    </div>
+
+                    <div className="nav-logout">
                         <Logout />
-                    </ul>
-                </nav>
-                : <nav className='nav__links'>
-                    <ul>
-                        <li className='guest__forum__page' style={{ marginRight: '650px' }}><Link to='/forum'>Forum page</Link></li>
-                        <li className='nav__button'><Link to='/login'>Login</Link></li>
-                        <li className='nav__button'><Link to='/register'>Register</Link></li>
-                    </ul>
-                </nav>}
-        </header>
+                    </div>
+                </div> :
+
+                <div className="nav-grid-wrapper-guest">
+                    <div className="nav-home">
+                        <Link to='/'>Home</Link>
+                    </div>
+
+                    <div className="nav-forum-page">
+                        <Link to='/forum'>Forum page</Link>
+                    </div>
+
+                    <div className="nav-greet-guest">
+                        {`Welcome, Guest`}
+                    </div>
+
+                    <div className="nav-login-page">
+                        <Link to='/login'>Login</Link>
+                    </div>
+
+                    <div className="nav-register-page">
+                        <Link to='/register'>Register</Link>
+                    </div>
+                </div>}
+
+        </div>
     );
 };
 
-export default UserAuth;
+export default Navigation;

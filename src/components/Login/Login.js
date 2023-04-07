@@ -35,51 +35,55 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">
-            <div>
-                <h1 className="login-title">Sign In</h1>
+        <div className="login-body">
+
+            <div className="login-container">
+                <div>
+                    <h1 className="login-title">Sign In</h1>
+                </div>
+
+                <form method="POST">
+
+                    <div className="email">
+                        <label
+                            className="email-label"
+                            htmlFor="email">Email
+                        </label>
+
+                        <input
+                            className="email-input"
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                            value={value.email}
+                            onChange={handleEventSubmit}
+                        />
+                    </div>
+
+                    <div className="password">
+                        <label
+                            className="password-label"
+                            htmlFor="password">Password
+                        </label>
+
+                        <input
+                            className="password-input"
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            value={value.password}
+                            onChange={handleEventSubmit}
+                        />
+                    </div>
+
+                    <input className="submit-btn" onClick={handleSignIn} type="submit" value="Log in" />
+                    <p className="register-redirect">
+                        Don't have an account?
+                        <Link to="/register" className="register-link"> Sign up</Link>
+                    </p>
+                </form>
             </div>
 
-            <form method="POST">
-
-                <div className="email">
-                    <label 
-                    className="email-label" 
-                    htmlFor="email">Email
-                    </label>
-
-                    <input 
-                    className="email-input" 
-                    name="email" 
-                    type="email" 
-                    placeholder="Email" 
-                    value={value.email} 
-                    onChange={handleEventSubmit} 
-                    />
-                </div>
-
-                <div className="password">
-                    <label 
-                    className="password-label" 
-                    htmlFor="password">Password
-                    </label>
-                    
-                    <input 
-                    className="password-input" 
-                    name="password" 
-                    type="password" 
-                    placeholder="Password" 
-                    value={value.password} 
-                    onChange={handleEventSubmit}
-                    />
-                </div>
-
-                <input className="submit-btn"  onClick={handleSignIn} type="submit" value="Log in" />
-                <p className="register-redirect">
-                    Don't have an account?
-                    <Link to="/register" className="register-link"> Sign up</Link>
-                </p>
-            </form>
         </div>
     );
 };

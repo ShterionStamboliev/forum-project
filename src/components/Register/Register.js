@@ -92,78 +92,82 @@ const Register = () => {
     };
 
     return (
-        <div className="register-container">
-            <div>
-                <h1 className="register-title">Sign Up</h1>
+        <div className="register-body">
+
+            <div className="register-container">
+                <div>
+                    <h1 className="register-title">Sign Up</h1>
+                </div>
+
+                <form method="POST">
+
+                    <div className="first-name">
+                        <label className="first-name-label" htmlFor="fname">Name</label>
+                        <input
+                            className="first-name-input"
+                            name="name"
+                            type="text"
+                            placeholder="First name"
+                            value={value.name}
+                            onChange={handleEventSubmit}
+                        />
+                    </div>
+
+                    <div className="email">
+                        <label className="email-label" htmlFor="email">Email</label>
+                        <input
+                            className="email-input"
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                            value={value.email}
+                            onChange={handleEventSubmit}
+                        />
+                    </div>
+
+                    <div className="username">
+                        <label className="username-label" htmlFor="username">Username</label>
+                        <input
+                            className="username-input"
+                            name="username"
+                            type="text"
+                            placeholder="Username"
+                            value={value.username}
+                            onChange={handleEventSubmit}
+                        />
+                    </div>
+
+                    <div className="password">
+                        <label className="password-label" htmlFor="password">Password</label>
+                        <input
+                            className="password-input"
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            value={value.password}
+                            onChange={handleEventSubmit}
+                        />
+                    </div>
+
+                    <div className="confirm-password">
+                        <label className="confirm-password-label" htmlFor="confirm-password">Confirm password</label>
+                        <input
+                            className="confirm-password-input"
+                            name="confirmPassword"
+                            type="password"
+                            placeholder="Confirm Password"
+                            value={value.confirmPassword}
+                            onChange={handleEventSubmit}
+                        />
+                    </div>
+                    <input className="submit-btn" onClick={handleSubmit} type="submit" value="Register" />
+                    <p className="login-redirect">
+                        Already have an account?
+                        <Link to="/login" className="login-link">Log in</Link>
+                    </p>
+                </form>
             </div>
-
-            <form method="POST">
-
-                <div className="first-name">
-                    <label className="first-name-label" htmlFor="fname">Name</label>
-                    <input
-                        className="first-name-input"
-                        name="name"
-                        type="text"
-                        placeholder="First name"
-                        value={value.name}
-                        onChange={handleEventSubmit}
-                    />
-                </div>
-
-                <div className="email">
-                    <label className="email-label" htmlFor="email">Email</label>
-                    <input
-                        className="email-input"
-                        name="email"
-                        type="email"
-                        placeholder="Email"
-                        value={value.email}
-                        onChange={handleEventSubmit}
-                    />
-                </div>
-
-                <div className="username">
-                    <label className="username-label" htmlFor="username">Username</label>
-                    <input
-                        className="username-input"
-                        name="username"
-                        type="text"
-                        placeholder="Username"
-                        value={value.username}
-                        onChange={handleEventSubmit}
-                    />
-                </div>
-
-                <div className="password">
-                    <label className="password-label" htmlFor="password">Password</label>
-                    <input
-                        className="password-input"
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        value={value.password}
-                        onChange={handleEventSubmit}
-                    />
-                </div>
-
-                <div className="confirm-password">
-                    <label className="confirm-password-label" htmlFor="confirm-password">Confirm password</label>
-                    <input
-                        className="confirm-password-input"
-                        name="confirmPassword"
-                        type="password"
-                        placeholder="Confirm Password"
-                        value={value.confirmPassword}
-                        onChange={handleEventSubmit}
-                    />
-                </div>
-                <input className="submit-btn" onClick={handleSubmit} type="submit" value="Register" />
-                <p className="login-redirect">
-                    Already have an account?
-                    <Link to="/login" className="login-link">Log in</Link>
-                </p>
-            </form>
+            
         </div>
     );
 };

@@ -70,44 +70,46 @@ const CreateThread = () => {
     };
 
     return (
-        <div className="create-post-container">
+        <div className="create-body">
 
-            <div>
-                <h1 className="create-post-title">Create new post</h1>
+            <div className="create-post-container">
+                <div>
+                    <h1 className="create-post-title">Create new post</h1>
+                </div>
+
+                <div className="post-title">
+                    <label className="post-title-label" htmlFor="post-title">Thread title: </label>
+
+                    <input
+                        value={value.title}
+                        onChange={handleEventSubmit}
+                        className="post-title-input"
+                        type="text"
+                        name="title"
+                        id="title"
+                        placeholder="Enter thread title..."
+                    />
+                </div>
+
+                <div className="post-comment">
+                    <label className="post-comment-label" htmlFor="post-comment">Description: </label>
+
+                    <textarea
+                        value={value.description}
+                        onChange={handleEventSubmit}
+                        className="post-comment-input"
+                        type="text"
+                        name="description"
+                        id="comment"
+                        cols="30"
+                        rows="10"
+                        placeholder="Set thread description...">
+                    </textarea>
+
+                </div>
+                <input type="submit" onClick={onSubmitThread} className="btn-submit" value="Submit" />
             </div>
 
-            <div className="post-title">
-                <label className="post-title-label" htmlFor="post-title">Thread title: </label>
-
-                <input
-                    value={value.title}
-                    onChange={handleEventSubmit}
-                    className="post-title-input"
-                    type="text"
-                    name="title"
-                    id="title"
-                    placeholder="Enter thread title..."
-                />
-            </div>
-
-            <div className="post-comment">
-                <label className="post-comment-label" htmlFor="post-comment">Description: </label>
-
-                <textarea
-                    value={value.description}
-                    onChange={handleEventSubmit}
-                    className="post-comment-input"
-                    type="text"
-                    name="description"
-                    id="comment"
-                    cols="30"
-                    rows="10"
-                    placeholder="Set thread description...">
-                </textarea>
-
-            </div>
-
-            <input type="submit" onClick={onSubmitThread} className="btn-submit" value="Submit" />
         </div>
     );
 };

@@ -1,3 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;1,300&display=swap");
+
+.edit-account-background {
+  background-image: url("../../contents/gate.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-y: hidden;
+  position: fixed;
+  top: 90px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .edit-account-wrapper {
   display: grid;
   margin: 10px auto 0 auto;
@@ -13,13 +29,14 @@
     "edit-email edit-e-address "
     "edit-user edit-names "
     "edit-username edit-username-input"
-    "c submit-edit-button  ";
+    "c submit-edit-button ";
   grid-template-columns: 0.5fr 5fr;
   grid-auto-rows: 1.25fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr;
   margin: 10px auto 0 auto;
   width: 800px;
-  border: 1px solid #737373;
+  border: 1px solid #333333;
   border-radius: 4px;
+  background-color: #24252a;
 }
 
 .edit-account-image {
@@ -84,7 +101,7 @@
   margin-bottom: 22px;
   color: #ecf0f1;
   margin-left: 5px;
-  background-color: #333333;
+  /* background-color: #333333; */
   border: none;
 }
 
@@ -106,7 +123,7 @@
   margin-right: 15px;
   margin-bottom: 22px;
   margin-left: 5px;
-  background-color: #333333;
+  /* background-color: #333333; */
   border: none;
 }
 
@@ -126,7 +143,7 @@
   margin-bottom: 22px;
   color: #ecf0f1;
   margin-left: 5px;
-  background-color: #333333;
+  /* background-color: #333333; */
   border: none;
 }
 
@@ -143,7 +160,7 @@
   position: relative;
   padding: 15px 0px;
   top: 0px;
-  left: 280px;
+  left: 210px;
   width: 120px;
   height: 40px;
 }
@@ -157,4 +174,18 @@
   max-width: 87px;
   max-height: 48px;
   font-weight: bold;
+}
+
+.edit-account-cancel {
+  grid-area: submit-edit-button;
+  position: relative;
+  padding: 15px 0px;
+  top: 0px;
+  left: 320px;
+
+}
+
+.account-cancel-button {
+  height: 40px;
+
 }

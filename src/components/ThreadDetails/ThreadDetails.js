@@ -18,8 +18,6 @@ const ThreadDetails = () => {
     const threadRef = doc(db, 'threads', id);
     const currentUserId = user?.uid;
 
-        console.log(user.displayName);
-
     const owners = () => getDoc(threadRef)
     .then((res) => {
         const usr = res.get('author.owner');

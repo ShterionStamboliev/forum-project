@@ -24,9 +24,9 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/forum' element={<Forum />} />
-                    <Route path='/forum/:id' element={<ThreadDetails /> } />  
+                    <Route path='/forum/:id' element={<ThreadDetails />} />
                     <Route path='/forum/:id/edit' element={<EditThread />} />
-                    
+
                     <Route path='/create-thread' element={<RouteGuard> <CreateThread /> </RouteGuard>} />
                     <Route path='/account' element={<RouteGuard>  <Account /></RouteGuard>} />
                     <Route path='/account/:id/edit' element={<EditAccount />} />

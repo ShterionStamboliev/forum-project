@@ -84,109 +84,110 @@ const Account = () => {
     };
 
     return (
-        <div className='account-wrapper'>
-            <div className="account-info-wrapper">
-                <div className="account-image">
-                    <Avatar className="user-avatar"
-                        src={imageUrl}
-                        sx={{ width: 90, height: 90 }}
-                    />
-                </div>
+        <div className="account-background">
+            <div className='account-wrapper'>
+                <div className="account-info-wrapper">
+                    <div className="account-image">
+                        <Avatar className="user-avatar"
+                            src={imageUrl}
+                            sx={{ width: 90, height: 90 }}
+                        />
+                    </div>
 
-                <Stack className='upload-img' direction="row" alignItems="center" spacing={2}>
-                    <IconButton onChange={handleImageChange}
-                        sx={{ color: '#0088A9' }}
-                        className='upload-img'
-                        color="primary"
-                        aria-label="upload picture"
-                        component="label">
-                        <input hidden accept="image/*" type="file" />
-                        <PhotoCamera sx={{ color: '#0088A9' }} />
-                    </IconButton>
-                </Stack>
+                    <Stack className='upload-img' direction="row" alignItems="center" spacing={2}>
+                        <IconButton onChange={handleImageChange}
+                            sx={{ color: '#0088A9' }}
+                            className='upload-img'
+                            color="primary"
+                            aria-label="upload picture"
+                            component="label">
+                            <input hidden accept="image/*" type="file" />
+                            <PhotoCamera sx={{ color: '#0088A9' }} />
+                        </IconButton>
+                    </Stack>
 
-                {!isClicked ?
-                    <Stack className='submit-img' direction="row" spacing={2}>
-                        <Button onClick={uploadImage} disabled={isClicked}
-                            sx={{
-                                fontSize: '12px',
-                                borderRadius: '50px',
-                                fontFamily: 'Montserrat, sans-serif',
-                                backgroundColor: '#0088A9',
-                                ":hover": { backgroundColor: '#0099CC' }
-                            }}
-                            variant="contained" endIcon={<CloudUploadIcon />}>
-                            Upload
-                        </Button>
-                    </Stack> :
-                    <Stack className='remove-img' direction="row" spacing={2}>
-                        <Button onClick={handleDelete} disabled={!isClicked}
-                            variant="contained"
-                            sx={{
-                                fontSize: '12px',
-                                borderRadius: '50px',
-                                backgroundColor: '#0088A9',
-                                color: 'white',
-                                ":hover": { backgroundColor: '#0099CC' }
-                            }}
-                            startIcon={<DeleteIcon />}>
-                            Remove
-                        </Button>
-                    </Stack>}
+                    {!isClicked ?
+                        <Stack className='submit-img' direction="row" spacing={2}>
+                            <Button onClick={uploadImage} disabled={isClicked}
+                                sx={{
+                                    fontSize: '12px',
+                                    borderRadius: '50px',
+                                    backgroundColor: '#0088A9',
+                                    ":hover": { backgroundColor: '#0099CC' }
+                                }}
+                                variant="contained" endIcon={<CloudUploadIcon />}>
+                                Upload
+                            </Button>
+                        </Stack> :
+                        <Stack className='remove-img' direction="row" spacing={2}>
+                            <Button onClick={handleDelete} disabled={!isClicked}
+                                variant="contained"
+                                sx={{
+                                    fontSize: '12px',
+                                    borderRadius: '50px',
+                                    backgroundColor: '#0088A9',
+                                    color: 'white',
+                                    ":hover": { backgroundColor: '#0099CC' }
+                                }}
+                                startIcon={<DeleteIcon />}>
+                                Remove
+                            </Button>
+                        </Stack>}
 
-                <Stack className='edit-account-profile' direction="row" spacing={2}>
-                    <Link to={`/account/${user.uid}/edit`}>
-                        <Button
-                            variant="contained"
-                            sx={{
-                                backgroundColor: '#0088A9',
-                                color: 'white',
-                                fontSize: '12px',
-                                borderRadius: '50px',
-                                ":hover": { backgroundColor: '#0099CC' }
-                            }}>
-                            Edit profile
-                        </Button>
-                    </Link>
-                </Stack>
+                    <Stack className='edit-account-profile' direction="row" spacing={2}>
+                        <Link to={`/account/${user.uid}/edit`}>
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    backgroundColor: '#0088A9',
+                                    color: 'white',
+                                    fontSize: '12px',
+                                    borderRadius: '50px',
+                                    ":hover": { backgroundColor: '#0099CC' }
+                                }}>
+                                Edit profile
+                            </Button>
+                        </Link>
+                    </Stack>
 
-                {Object.values(userData).map((user) => {
-                    return <React.Fragment key={user.id}>
+                    {Object.values(userData).map((user) => {
+                        return <React.Fragment key={user.id}>
 
-                        <div className="currentuser-username">
-                            {user.username}
-                        </div>
-
-                        {Object.keys(user.posts).length > 0 ?
-                            <div className="account-threads">
-                                Active threads: {Object.keys(user.posts).length}
+                            <div className="currentuser-username">
+                                {user.username}
                             </div>
-                            : <div className="account-threads">
-                                Active threads: 0
-                            </div>}
 
-                        <div className="user-info">
-                            Profile information
-                        </div>
+                            {Object.keys(user.posts).length > 0 ?
+                                <div className="account-threads">
+                                    Active threads: {Object.keys(user.posts).length}
+                                </div>
+                                : <div className="account-threads">
+                                    Active threads: 0
+                                </div>}
 
-                        <div className="email-icon">
-                            E-mail
-                        </div>
+                            <div className="user-info">
+                                Profile information
+                            </div>
 
-                        <div className="account-email">
-                            {user.email}
-                        </div>
+                            <div className="email-icon">
+                                E-mail
+                            </div>
 
-                        <div className="account-user-icon">
-                            Name
-                        </div>
+                            <div className="account-email">
+                                {user.email}
+                            </div>
 
-                        <div className="account-names">
-                            {user.name}
-                        </div>
+                            <div className="account-user-icon">
+                                Name
+                            </div>
 
-                    </React.Fragment>
-                })}
+                            <div className="account-names">
+                                {user.name}
+                            </div>
+
+                        </React.Fragment>
+                    })}
+                </div>
             </div>
         </div>
     );
