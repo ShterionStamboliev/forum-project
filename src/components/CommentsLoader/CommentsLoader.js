@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { db } from '../../config/firebase';
-import './comments.css'
 
 const CommentsLoader = () => {
     const [usersComments, setUsersComments] = useState([]);

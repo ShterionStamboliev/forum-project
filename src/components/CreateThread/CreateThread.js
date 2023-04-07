@@ -7,7 +7,7 @@ import {
     runEmptyThreadTitleInput,
     runEmptyDescriptionInput
 } from "../../utils/alerts";
-import './Create.css';
+import './CreateThread.css';
 
 const CreateThread = () => {
     const [value, setValue] = useState({

@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
-import Forum from './components/Forum/Forum';
+// import Forum from './components/Forum/Forum';
+import ForumNew from './components/Forum/ForumNew';
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import CreateThread from './components/CreateThread/CreateThread';
@@ -23,7 +24,7 @@ function App() {
                 <Navigation />
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='/forum' element={<Forum />} />
+                    <Route path='/forum' element={<ForumNew />} />
                     <Route path='/forum/:id' element={<ThreadDetails />} />
                     <Route path='/forum/:id/edit' element={<EditThread />} />
 
