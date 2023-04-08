@@ -12,8 +12,9 @@ import GuestRouteGuard from './components/RouteGuards/GuestRouteGuard';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Logout from './components/Logout/Logout';
 import ThreadDetails from './components/ThreadDetails/ThreadDetails';
-import EditAccount from './components/EditAccount/EditAccount'
-import Navigation from './components/Navigation/Navigation'
+import EditAccount from './components/EditAccount/EditAccount';
+import Navigation from './components/Navigation/Navigation';
+import Tos from './components/Tos/Tos';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                     <Route path='/register' element={<Register />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/logout' element={<Logout />} />
+                    <Route path='/tos' element={<Tos />} />
                     <Route path='*' element={<PageNotFound />} />
                 </Routes>
 

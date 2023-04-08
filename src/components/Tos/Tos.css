@@ -1,0 +1,20 @@
+.tos-background {
+  background-image: url("../../contents/tos.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-y: hidden;
+  position: fixed;
+  top: 90px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.forum-tos-rules {
+  position: relative;
+  left: 45%;
+  color: #ecf0f1;
+}

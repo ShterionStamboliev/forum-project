@@ -21,13 +21,10 @@ const Footer = () => {
 
             <ul className="other-info">
                 <li>
-                    <Link to=''>Services</Link>
+                    <Link to=''>Terms of service</Link>
                 </li>
                 <li>
                     <Link to=''>About</Link>
-                </li>
-                <li>
-                    <Link to=''>Privacy Policy</Link>
                 </li>
             </ul>
 
