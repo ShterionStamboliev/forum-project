@@ -78,13 +78,13 @@
 }
 
 .forum-thread-link {
-  color: #ecf0f1;
+  color: #d3d7dd;
   text-decoration: none;
 }
 
 .forum-thread-link:hover {
-  transition: 0.3s ease 0s;
-  color: red;
+  transition: 0.3s ease-in-out 0.1s;
+  color: rgb(255, 255, 255);
 }
 
 .forum-author-col {
