@@ -37,7 +37,6 @@ const CommentsLoader = () => {
     return (
         <>
             {usersComments.map((x) => {
-                console.log(x.photo)
                 return (
                     <div className="grid-comments" key={x.id}>
                             <Avatar className="user-comment-icon"

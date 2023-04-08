@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;1,300&display=swap");
 
 .account-background {
-  background-image: url('../../contents/gate.jpg');
+  background-image: url("../../contents/gate.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   overflow-y: hidden;
@@ -36,7 +36,6 @@
   border: 1px solid #333333;
   border-radius: 4px;
   background-color: #24252a;
-
 }
 
 .account-image {
