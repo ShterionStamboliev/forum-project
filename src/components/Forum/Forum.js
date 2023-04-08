@@ -30,45 +30,49 @@ const Forum = () => {
         <div className="forum-background-body">
 
             <div className="forum-wrapper-title">
+                {threads.length === 0 ?
+                    null :
 
-                <div className="forum-wrapper-header">
+                    <div className="forum-wrapper-header">
 
-                    <div className="forum-topic-col">
-                        Thread title
-                    </div>
-
-                    <div className="forum-author-col">
-                        Author
-                    </div>
-
-                    <div className="forum-posted-col">
-                        Posted at
-                    </div>
-
-                </div>
-
-                {threads.length > 0 ? Object.values(threads).map((thread) => {
-                    return <div className="forum-wrapper" key={thread.id}>
-
-                        <div className="forum-thread-title">
-                            <Link to={`/forum/` + thread.id} className="forum-thread-link">{thread.post.postTitle}</Link>
+                        <div className="forum-topic-col">
+                            Thread title
                         </div>
 
-                        <div className="forum-author-name">
-                            {thread.author.name}
+                        <div className="forum-author-col">
+                            Author
                         </div>
 
-                        <div className="forum-post-date">
-                            {thread.post.postedOn} at {thread.post.postedAt}
+                        <div className="forum-posted-col">
+                            Posted at
                         </div>
 
-                    </div>
-                }) : null}
+                    </div>}
 
+                {threads.length === 0 ?
+                    <div className="no-threads-title">
+                        <h2>There are no threads yet. <br /> Be the first one to make a <Link to='/create-thread' className="post-link">post</Link></h2>
+                    </div> :
+                    Object.values(threads).map((thread) => {
+                        console.log(threads.length);
+                        return <div className="forum-wrapper" key={thread.id}>
+
+                            <div className="forum-thread-title">
+                                <Link to={`/forum/` + thread.id} className="forum-thread-link">{thread.post.postTitle}</Link>
+                            </div>
+
+                            <div className="forum-author-name">
+                                {thread.author.name}
+                            </div>
+
+                            <div className="forum-post-date">
+                                {thread.post.postedOn} at {thread.post.postedAt}
+                            </div>
+
+                        </div>
+                    })}
             </div>
-
         </div>
-
     );
 };
 

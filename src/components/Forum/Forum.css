@@ -1,5 +1,5 @@
 .forum-background-body {
-  background-image: url('../../contents/gate.jpg');
+  background-image: url("../../contents/gate.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   overflow-y: hidden;
@@ -131,4 +131,19 @@
   padding-left: 5px;
   background-color: #525252;
   word-wrap: break-word;
+}
+
+.no-threads-title {
+  position: relative;
+  width: 900px;
+}
+
+.post-link {
+  color: #ecf0f1;
+  font-style: italic;
+}
+
+.post-link:hover {
+  transition: all 0.3s ease 0s;
+  color: #0088a9;
 }
