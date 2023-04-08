@@ -1,5 +1,6 @@
 import React from 'react';
 import './PageNotFound.css'
+import { Link } from 'react-router-dom';
 
 const PageNotFound = () => {
     return (
@@ -89,7 +90,7 @@ const PageNotFound = () => {
                     <p>Damnit stranger,</p>
                     <p>You got lost in the <strong>404</strong> galaxy.</p>
                     <p>
-                        <button>Go back to earth.</button>
+                        <Link to='/'><button>Go back to earth.</button></Link>
                     </p>
                 </article>
             </main>

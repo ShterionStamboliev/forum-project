@@ -4,11 +4,13 @@ import Logout from '../Logout/Logout';
 import './Navigation.css'
 
 const Navigation = () => {
+
     const { user } = UseAuth();
 
     return (
+
         <div className="nav-grid">
-            {user ?
+            {user !== null ?
                 <div className="nav-grid-wrapper-user">
                     <div className="nav-home">
                         <Link to='/'>D4jsp</Link>
@@ -45,7 +47,7 @@ const Navigation = () => {
                     </div>
 
                     <div className="nav-greet-guest">
-                        {`Welcome, Guest`}
+                        Welcome, Guest
                     </div>
 
                     <div className="nav-login-page">

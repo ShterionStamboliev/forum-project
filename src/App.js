@@ -8,7 +8,7 @@ import Footer from './components/Footer/Footer';
 import EditThread from './components/Thread/EditThread';
 import Account from './components/Account/Account';
 import { AuthContextProvider } from './contexts/AuthContext';
-import RouteGuard from './components/RouteGuard/RouteGuard';
+import GuestRouteGuard from './components/RouteGuards/GuestRouteGuard';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Logout from './components/Logout/Logout';
 import ThreadDetails from './components/ThreadDetails/ThreadDetails';
@@ -24,12 +24,11 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/forum' element={<Forum />} />
-                    <Route path='/forum/:id' element={<ThreadDetails />} />
-                    <Route path='/forum/:id/edit' element={<EditThread />} />
-
-                    <Route path='/create-thread' element={<RouteGuard> <CreateThread /> </RouteGuard>} />
-                    <Route path='/account' element={<RouteGuard>  <Account /></RouteGuard>} />
-                    <Route path='/account/:id/edit' element={<EditAccount />} />
+                    <Route path='/forum/:id/' element={<ThreadDetails />} />
+                    <Route path='/forum/:id/edit' element={<GuestRouteGuard> <EditThread /> </GuestRouteGuard>} />
+                    <Route path='/create-thread' element={<GuestRouteGuard> <CreateThread /> </GuestRouteGuard>} />
+                    <Route path='/account' element={<GuestRouteGuard>  <Account /> </GuestRouteGuard>} />
+                    <Route path='/account/:id/edit' element={<GuestRouteGuard> <EditAccount /> </GuestRouteGuard>} />
                     <Route path='/register' element={<Register />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/logout' element={<Logout />} />

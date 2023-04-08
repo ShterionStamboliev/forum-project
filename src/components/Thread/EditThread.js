@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { runEmptyFieldAlert } from '../../utils/alerts';
 import Swal from 'sweetalert2';
 import { UseAuth } from '../../contexts/AuthContext';
-import './Thread.css';
+import './EditThread.css';
 
 const EditThread = () => {
     const { id } = useParams();
@@ -103,7 +103,8 @@ const EditThread = () => {
     };
 
     return (
-        <>
+        <div className="update-post-body">
+
             <div className="update-post-container">
                 <div>
                     <h1 className="update-post">Update post</h1>
@@ -146,7 +147,8 @@ const EditThread = () => {
                 <input type="submit" onClick={handleUpdate} className="update-btn-submit-post" value="Update" />
                 <input type="submit" onClick={handleDelete} className="update-btn-delete-post" value="Delete" />
             </div>
-        </>
+
+        </div>
     );
 };
 
