@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Swal from 'sweetalert2';
 import { UseAuth } from '../../contexts/AuthContext';
-import { deleteField, doc,setDoc, updateDoc } from 'firebase/firestore';
+import { deleteField, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { runEmptyFieldAlert } from '../../utils/alerts';
 import { Link, useNavigate } from 'react-router-dom';
 import './EditAccount.css'
@@ -96,10 +96,13 @@ const EditAccount = () => {
                         email: value.email,
                         username: value.username,
                         name: value.name
+
                     }).then(() => {
                         Swal.fire('Saved', '', 'success')
                         updateEmail(user, value.email)
-                            .then(() => navigate('/account'))
+                            .then(() => updateProfile(user, {
+                                displayName: value.username
+                            })).then(() => navigate('/account'))
                     })
                 } else if (result.isDenied) {
                     Swal.fire('Cancelled', '', 'info')
