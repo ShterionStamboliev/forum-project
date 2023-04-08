@@ -73,9 +73,19 @@ main {
   color: #0088a9;
 }
 
+.tos-footer {
+  position: relative;
+  right: 20px;
+}
+
 .copyright {
   padding-bottom: 5px;
   text-align: center;
   font-size: 15px;
   color: #0088a9;
+}
+
+.github-page {
+  position: relative;
+  right: 20px;
 }

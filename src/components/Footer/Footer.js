@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import './Footer.css';
 
 const Footer = () => {
@@ -9,27 +9,18 @@ const Footer = () => {
 
             <ul className="socials">
                 <li>
-                    <Link to=''><FaInstagram style={{ color: '#0088a9'}} /></Link>
-                </li>
-                <li>
-                    <Link to=''><FaFacebook style={{ color: '#0088a9' }} /></Link>
-                </li>
-                <li>
-                    <Link to=''><FaTwitter style={{ color: '#0088a9' }} /></Link>
+                    <Link to='https://github.com/ShterionStamboliev' className="github-page"><FaGithub style={{ color: '#0088a9' }} /></Link>
                 </li>
             </ul>
 
             <ul className="other-info">
                 <li>
-                    <Link to=''>Terms of service</Link>
-                </li>
-                <li>
-                    <Link to=''>About</Link>
+                    <Link to='/tos' className="tos-footer">Terms of service</Link>
                 </li>
             </ul>
 
             <p className="copyright">
-                &copy; Stamboliev 2023
+               D4jsp &copy; Stamboliev 2023
             </p>
         </div>
     );
