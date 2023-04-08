@@ -63,13 +63,12 @@
 .nav-register-page {
   grid-area: register;
   font-size: 25px;
-  justify-self: start;
+  justify-self: center;
 }
 
 .nav-register-page a {
   text-decoration: none;
   color: #ecf0f1;
-  padding-left: 10px;
 }
 
 .nav-register-page a:hover {
@@ -145,6 +144,7 @@
   grid-area: greet;
   font-size: 25px;
   color: #ecf0f1;
+  justify-self: end;
 }
 
 .nav-account-page {

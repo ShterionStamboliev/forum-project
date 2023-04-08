@@ -23,9 +23,10 @@ const LoggedInUserView = ({ thread }) => {
         batch.set(threadRef, {
             comments: arrayUnion(
                 {
-                    author: currentUserEmail,
+                    author: user.displayName,
                     comment: commentText,
-                    photo: userImageProfile
+                    photo: userImageProfile,
+                    email: currentUserEmail
                 }
             )
         }, { merge: true })

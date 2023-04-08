@@ -32,7 +32,7 @@ const CommentsLoader = () => {
         getSnap();
 
         return () => a.abort();
-    }, []); // PUT USERSCOMMENTS DEPENDANCY HERE FOR AUTO COMMENTS RE-LOAD
+    }, []); 
 
     return (
         <>

@@ -3,7 +3,6 @@ import CommentsLoader from '../CommentsLoader/CommentsLoader';
 import { Link, useParams } from 'react-router-dom';
 import { Avatar, Button, Stack } from '@mui/material';
 import { UseAuth } from '../../contexts/AuthContext';
-import EditIcon from '@mui/icons-material/Edit';
 
 const OwnerView = ({ thread }) => {
 

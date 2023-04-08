@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { UseAuth } from "../../contexts/AuthContext";
-import { runEmptyEmailField, runEmptyPasswordField } from "../../utils/alerts";
+import { runEmptyEmailField, runEmptyPasswordField, runInvalidSignIn } from "../../utils/alerts";
 import { onLoginSuccess } from "../../utils/alerts";
 import './Login.css'
 
@@ -30,7 +30,8 @@ const Login = () => {
             onLoginSuccess();
             navigate('/');
         } catch (error) {
-            alert(error.message)
+            runInvalidSignIn();
+            return;
         }
     };
 

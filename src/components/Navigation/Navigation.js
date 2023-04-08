@@ -14,8 +14,6 @@ const Navigation = () => {
                         <Link to='/'>D4jsp</Link>
                     </div>
 
-                    {/* <img src={logo} style={{maxWidth: '70px', maxHeight: '70px'}} className="nav-circle-icon" /> */}
-
                     <div className="nav-create-post">
                         <Link to='/create-thread'>Create Post</Link>
                     </div>

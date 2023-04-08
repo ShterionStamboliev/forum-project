@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Swal from 'sweetalert2';
 import { UseAuth } from '../../contexts/AuthContext';
-import { collection, deleteField, doc, getDocs, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import { deleteField, doc,setDoc, updateDoc } from 'firebase/firestore';
 import { runEmptyFieldAlert } from '../../utils/alerts';
 import { Link, useNavigate } from 'react-router-dom';
 import './EditAccount.css'

@@ -165,3 +165,11 @@ export const runEmptyUsernameError = () => {
         title: 'Please enter your username.',
     });
 };
+
+
+export const runInvalidSignIn = () => {
+    Swal.fire({
+        icon: 'error',
+        title: 'Invalid e-mail or password',
+    });
+};

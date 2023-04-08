@@ -19,18 +19,18 @@ const ThreadDetails = () => {
     const currentUserId = user?.uid;
 
     const owners = () => getDoc(threadRef)
-    .then((res) => {
-        const usr = res.get('author.owner');
-        const owner = usr === currentUserId;
-        return owner;
-    });
+        .then((res) => {
+            const usr = res.get('author.owner');
+            const owner = usr === currentUserId;
+            return owner;
+        });
 
     const prom = Promise.resolve(owners());
     prom.then(function (val) {
         const owner = val;
         return owner;
     });
-    
+
     const avatarUpdate = async () => {
         await updateDoc(threadRef, {
             'author.photo': user.photoURL
@@ -60,14 +60,16 @@ const ThreadDetails = () => {
     }, []);
 
     return (
-        <div className="wrapper">
-            {isOwner ?
-                <OwnerView thread={thread} /> :
-                !isOwner && user ?
-                    <LoggedInUserView thread={thread} /> :
-                    !isOwner && !user ?
-                        <GuestView thread={thread} /> :
-                        null}
+        <div className="wrapper-background-body-img">
+            <div className="wrapper">
+                {isOwner ?
+                    <OwnerView thread={thread} /> :
+                    !isOwner && user ?
+                        <LoggedInUserView thread={thread} /> :
+                        !isOwner && !user ?
+                            <GuestView thread={thread} /> :
+                            null}
+            </div>
         </div>
     )
 };
