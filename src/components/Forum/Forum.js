@@ -51,7 +51,7 @@ const Forum = () => {
 
                 {threads.length === 0 ?
                     <div className="no-threads-title">
-                        <h2>There are no threads yet. <br /> Be the first one to make a <Link to='/create-thread' className="post-link">post</Link></h2>
+                        <h2>There are no threads yet.<br/> Be the first one to make a <Link to='/create-thread' className="post-link">post</Link></h2>
                     </div> :
                     Object.values(threads).map((thread) => {
                         console.log(threads.length);
