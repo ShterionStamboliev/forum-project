@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"target": "es2020",
+		"module": "CommonJS",
+		"importHelpers": true,
+		"strict": true,
+		"sourceMap": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
+		"importsNotUsedAsValues": "preserve",
+		"lib": ["ES2020", "DOM"]
+	},
+	"include": [
+		"./src/**/*.ts"
+	]
+}
